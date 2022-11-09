@@ -17,33 +17,38 @@ import {editorConfig} from '../../../../../constants';
 const BaseSourceCode = ({scriptSourceCode, updateSelectedItem}) => {
 	const editorRef = useRef();
 
+  console.log(scriptSourceCode)
+
 	return (
 		<Editor
-			config={editorConfig}
-			onInstanceReady={({editor}) => {
-				editor.setMode('source');
+      config={editorConfig}
+      onInstanceReady={({editor}) => {
+        editor.setMode('source');
+        if (scriptSourceCode) {
+          // editor.setData(scriptSourceCode[0]);
+        }
 
-				if (scriptSourceCode) {
-					editor.setData(scriptSourceCode[0]);
-				}
+        // document
+        // .querySelector('div.sidebar-body')
+        // .addEventListener('keyup', () => {
+        //  setTest(editor.getData())
+        // });
 
-				document
-					.querySelector('div.sidebar-body')
-					.addEventListener('keyup', () => {
-						updateSelectedItem(editor);
-					});
-
-				return () => {
-					document
-						.querySelector('div.sidebar-body')
-						.removeEventListener(
-							'keyup',
-							updateSelectedItem(editor)
-						);
-				};
-			}}
-			ref={editorRef}
-		/>
+        document.querySelector('button.btn-back').addEventListener('click', () => {
+          updateSelectedItem(editor.getData())
+        })
+				
+        return () => {
+          document
+            .querySelector('div.sidebar-body')
+            .removeEventListener(
+              'keyup',
+              updateSelectedItem(editor.getData())
+            );
+        };
+      }}
+      ref={editorRef}
+    />
 	);
 };
 

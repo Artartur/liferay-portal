@@ -179,6 +179,8 @@ const Timers = ({setContentName, setErrors}) => {
 		};
 		const sections = [];
 
+		console.log(selectedItem.data.taskTimers)
+
 		if (allTimerActions.reassignments.length) {
 			const data = allTimerActions.reassignments;
 			for (let index = 0; index < data[0][1].length; index++) {
@@ -203,9 +205,16 @@ const Timers = ({setContentName, setErrors}) => {
 				else if (section.assignmentType === 'scriptedAssignment') {
 					section.assignmentType = 'scriptedReassignment';
 
-					section.script = data.find(
+					// eslint-disable-next-line no-console
+					console.log(data)
+
+					const script = data.find(
 						(entry) => entry[0] === 'script'
-					)[1];
+					)[1]
+
+					console.log("script: " + script)
+
+					section.script = Array.isArray(script) ? script : script.split();
 				}
 				else if (
 					section.assignmentType === 'user' &&
@@ -225,6 +234,10 @@ const Timers = ({setContentName, setErrors}) => {
 				sections.push(section);
 			}
 		}
+
+		// eslint-disable-next-line no-console
+		console.log(sections);
+
 		const reassignmentsLength = sections.length;
 
 		if (allTimerActions.timerActions.length) {

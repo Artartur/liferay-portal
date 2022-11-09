@@ -22,24 +22,44 @@ const TimerSourceCode = () => {
 		selectedItem.data.taskTimers?.reassignments?.[0]?.script;
 
 	const updateTimer = (editor) => {
-		if (editor.getData().trim() !== '') {
-			setSelectedItem((previousValue) => ({
-				...previousValue,
-				data: {
-					...previousValue.data,
-					taskTimers: {
-						...previousValue.data.taskTimers,
-						reassignments: [
-							{
-								assignmentType: ['scriptedAssignment'],
-								script: [editor.getData()],
-								scriptLanguage: [DEFAULT_LANGUAGE],
-							},
-						],
-					},
-				},
-			}));
-		}
+		if (editor !== '') {
+      if(!scriptSourceCode) {
+        setSelectedItem((previousValue) => ({
+          ...previousValue,
+          data: {
+            ...previousValue.data,
+            taskTimers: {
+              ...previousValue.data.taskTimers,
+              reassignments: [
+                {
+                  assignmentType: ['scriptedAssignment'],
+                  script: editor,
+                  scriptLanguage: [DEFAULT_LANGUAGE],
+                },
+              ],
+            },
+          },
+        }));
+      } else {
+        setSelectedItem((previousValue) => ({
+          ...previousValue,
+          data: {
+            ...previousValue.data,
+            taskTimers: {
+              ...previousValue.data.taskTimers,
+              reassignments: [
+                ...previousValue.data.taskTimers.reassignments,
+                {
+                  assignmentType: ['scriptedAssignment'],
+                  script: editor,
+                  scriptLanguage: [DEFAULT_LANGUAGE],
+                },
+              ],
+            },
+          },
+        }));
+      }
+    }
 	};
 
 	return (
