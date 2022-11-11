@@ -77,6 +77,21 @@ export function Attachments({setValues, values}: IProps) {
 	};
 
 	useEffect(() => {
+		API.getAllObjectDefinitions().then((items) => {
+			const objectDefinitions = items.filter(({system}) => !system);
+
+			setObjectDefinitions(objectDefinitions);
+
+			const currentObjectDefinition = objectDefinitions?.find(
+				(item) => item.id === values.objectDefinitionId
+			);
+
+			setSelectedEntity(currentObjectDefinition);
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
 		const currentObjectDefinition = objectDefinitions?.find(
 			(item) => item.id === values.objectDefinitionId
 		);
@@ -96,14 +111,6 @@ export function Attachments({setValues, values}: IProps) {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [values.objectDefinitionId]);
-
-	useEffect(() => {
-		API.getAllObjectDefinitions().then((items) => {
-			const objectDefinitions = items.filter(({system}) => !system);
-
-			setObjectDefinitions(objectDefinitions);
-		});
-	}, []);
 
 	useEffect(() => {
 		setValues({
