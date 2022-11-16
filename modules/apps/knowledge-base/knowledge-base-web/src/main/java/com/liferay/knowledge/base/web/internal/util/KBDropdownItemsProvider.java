@@ -875,7 +875,7 @@ public class KBDropdownItemsProvider {
 						"resourcePrimKey", kbArticle.getResourcePrimKey()
 					).setResourceID(
 						"kbArticleRSS"
-					).buildString(),
+					).buildResourceURL(),
 					GetterUtil.getInteger(
 						_kbGroupServiceConfiguration.rssDelta()),
 					_kbGroupServiceConfiguration.rssDisplayStyle(),
