@@ -18,9 +18,7 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.util.CalendarFactory;
-import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.DateFormatFactory;
-import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.search.facet.modified.ModifiedFacetFactory;
 import com.liferay.portal.search.web.internal.modified.facet.builder.DateRangeFactory;
 import com.liferay.portal.search.web.internal.modified.facet.builder.ModifiedFacetBuilder;
@@ -59,21 +57,13 @@ public class ModifiedFacetPortletSharedSearchContributor
 				modifiedFacetPortletPreferences, portletSharedSearchSettings));
 	}
 
-	protected CalendarFactory calendarFactory;
-	protected DateFormatFactory dateFormatFactory;
-	protected DateRangeFactory dateRangeFactory;
-	protected JSONFactory jsonFactory;
-
-	@Reference
-	protected ModifiedFacetFactory modifiedFacetFactory;
-
 	private Facet _buildFacet(
 		ModifiedFacetPortletPreferences modifiedFacetPortletPreferences,
 		PortletSharedSearchSettings portletSharedSearchSettings) {
 
 		ModifiedFacetBuilder modifiedFacetBuilder = new ModifiedFacetBuilder(
-			modifiedFacetFactory, _getCalendarFactory(),
-			_getDateFormatFactory(), _jsonFactory);
+			_modifiedFacetFactory, _calendarFactory, _dateFormatFactory,
+			_jsonFactory);
 
 		modifiedFacetBuilder.setRangesJSONArray(
 			_replaceAliases(
@@ -101,46 +91,33 @@ public class ModifiedFacetPortletSharedSearchContributor
 		return modifiedFacetBuilder.build();
 	}
 
-	private CalendarFactory _getCalendarFactory() {
-
-		// See LPS-72507 and LPS-76500
-
-		if (calendarFactory != null) {
-			return calendarFactory;
-		}
-
-		return CalendarFactoryUtil.getCalendarFactory();
-	}
-
-	private DateFormatFactory _getDateFormatFactory() {
-
-		// See LPS-72507 and LPS-76500
-
-		if (dateFormatFactory != null) {
-			return dateFormatFactory;
-		}
-
-		return DateFormatFactoryUtil.getDateFormatFactory();
-	}
-
 	private DateRangeFactory _getDateRangeFactory() {
-		if (dateRangeFactory == null) {
-			dateRangeFactory = new DateRangeFactory(_getDateFormatFactory());
+		if (_dateRangeFactory == null) {
+			_dateRangeFactory = new DateRangeFactory(_dateFormatFactory);
 		}
 
-		return dateRangeFactory;
+		return _dateRangeFactory;
 	}
 
 	private JSONArray _replaceAliases(JSONArray rangesJSONArray) {
 		DateRangeFactory dateRangeFactory = _getDateRangeFactory();
 
-		CalendarFactory calendarFactory = _getCalendarFactory();
-
 		return dateRangeFactory.replaceAliases(
-			rangesJSONArray, calendarFactory.getCalendar(), _jsonFactory);
+			rangesJSONArray, _calendarFactory.getCalendar(), _jsonFactory);
 	}
 
 	@Reference
+	private CalendarFactory _calendarFactory;
+
+	@Reference
+	private DateFormatFactory _dateFormatFactory;
+
+	private DateRangeFactory _dateRangeFactory;
+
+	@Reference
 	private JSONFactory _jsonFactory;
+
+	@Reference
+	private ModifiedFacetFactory _modifiedFacetFactory;
 
 }
