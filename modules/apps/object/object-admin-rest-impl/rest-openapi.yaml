@@ -778,7 +778,7 @@ paths:
                                 type: array
             tags: ["ObjectRelationship"]
         post:
-            operationId: postObjectDefinitionObjectRelationship
+            operationId: postObjectDefinitionByExternalReferenceCodeObjectDefinitionExternalReferenceCodeObjectRelationship
             parameters:
                 - in: path
                   name: objectDefinitionExternalReferenceCode
