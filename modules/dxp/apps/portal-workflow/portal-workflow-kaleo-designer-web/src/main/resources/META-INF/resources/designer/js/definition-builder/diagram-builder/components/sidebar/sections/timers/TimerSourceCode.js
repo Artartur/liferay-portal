@@ -14,15 +14,12 @@ import React, {useContext} from 'react';
 import {DEFAULT_LANGUAGE} from '../../../../../source-builder/constants';
 import {DiagramBuilderContext} from '../../../../DiagramBuilderContext';
 import BaseSourceCode from '../shared-components/BaseSourceCode';
-
 const TimerSourceCode = () => {
 	const {selectedItem, setSelectedItem} = useContext(DiagramBuilderContext);
-
 	const scriptSourceCode =
 		selectedItem.data.taskTimers?.reassignments?.[0]?.script;
-
 	const updateTimer = (editor) => {
-		if (editor.getData().trim() !== '') {
+		if (editor !== '') {
 			setSelectedItem((previousValue) => ({
 				...previousValue,
 				data: {
@@ -32,7 +29,7 @@ const TimerSourceCode = () => {
 						reassignments: [
 							{
 								assignmentType: ['scriptedAssignment'],
-								script: [editor.getData()],
+								script: editor,
 								scriptLanguage: [DEFAULT_LANGUAGE],
 							},
 						],
@@ -49,5 +46,4 @@ const TimerSourceCode = () => {
 		/>
 	);
 };
-
 export default TimerSourceCode;

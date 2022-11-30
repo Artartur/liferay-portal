@@ -87,7 +87,7 @@ export default function SidebarHeader({
 		<div className="sidebar-header">
 			{showBackButton && (
 				<ClayButtonWithIcon
-					className="text-secondary"
+					className="btn-back text-secondary"
 					displayType="unstyled"
 					onClick={backButtonFunction}
 					symbol="angle-left"
