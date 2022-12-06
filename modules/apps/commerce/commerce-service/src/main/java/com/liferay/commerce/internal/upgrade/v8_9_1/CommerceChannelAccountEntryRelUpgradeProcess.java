@@ -50,15 +50,14 @@ public class CommerceChannelAccountEntryRelUpgradeProcess
 
 			try (ResultSet resultSet = preparedStatement1.executeQuery()) {
 				while (resultSet.next()) {
-					long commerceChannelAccountEntryRelId = resultSet.getLong(
-						"CChannelAccountEntryRelId");
-
 					preparedStatement2.setLong(
 						1,
 						ClassNameLocalServiceUtil.getClassNameId(
 							CommercePriceList.class));
 					preparedStatement2.setLong(
-						2, commerceChannelAccountEntryRelId);
+						2,
+						resultSet.getLong("CChannelAccountEntryRelId"));
+
 					preparedStatement2.addBatch();
 				}
 
