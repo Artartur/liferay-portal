@@ -94,6 +94,7 @@ export type TNotificationTemplate = {
 	description: string;
 	editorType: editorTypeOptions;
 	name: string;
+	objectDefinitionExternalReferenceCode: string;
 	objectDefinitionId: number | null;
 	recipientType: string;
 	recipients:
@@ -270,6 +271,7 @@ export default function EditNotificationTemplate({
 		description: '',
 		editorType: 'richText' as editorTypeOptions,
 		name: '',
+		objectDefinitionExternalReferenceCode: '',
 		objectDefinitionId: 0,
 		recipientType: '',
 		recipients: recipientInitialValue,
@@ -357,6 +359,7 @@ export default function EditNotificationTemplate({
 					description,
 					editorType,
 					name,
+					objectDefinitionExternalReferenceCode,
 					objectDefinitionId,
 					recipientType,
 					recipients,
@@ -373,6 +376,7 @@ export default function EditNotificationTemplate({
 					description,
 					editorType,
 					name,
+					objectDefinitionExternalReferenceCode,
 					objectDefinitionId,
 					recipientType,
 					recipients,

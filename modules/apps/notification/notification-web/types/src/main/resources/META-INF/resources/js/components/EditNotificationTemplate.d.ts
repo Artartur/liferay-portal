@@ -41,6 +41,7 @@ export declare type TNotificationTemplate = {
 	description: string;
 	editorType: editorTypeOptions;
 	name: string;
+	objectDefinitionExternalReferenceCode: string;
 	objectDefinitionId: number | null;
 	recipientType: string;
 	recipients:
