@@ -1838,7 +1838,7 @@ public class ObjectEntryLocalServiceTest {
 		ObjectDefinition objectDefinition =
 			_addObjectDefinitionWithAccountEntryRestricted();
 
-		// Get list of values ​​with owner of the Account Entry
+		// Get list of values with owner of the account entry
 
 		User user = UserTestUtil.addUser();
 
@@ -1862,7 +1862,7 @@ public class ObjectEntryLocalServiceTest {
 			accountEntry.getAccountEntryId(),
 			objectDefinition.getObjectDefinitionId(), user.getUserId(), 1);
 
-		// Get list of values with member of the Account Entry
+		// Get list of values with member of the account entry
 
 		user = UserTestUtil.addUser();
 
@@ -1873,7 +1873,7 @@ public class ObjectEntryLocalServiceTest {
 			accountEntry.getAccountEntryId(),
 			objectDefinition.getObjectDefinitionId(), user.getUserId(), 1);
 
-		// Get list of values with member of the Account Entry Organization
+		// Get list of values with member of the account entry organization
 
 		user = UserTestUtil.addUser();
 
@@ -1899,7 +1899,7 @@ public class ObjectEntryLocalServiceTest {
 			accountEntry.getAccountEntryId(),
 			objectDefinition.getObjectDefinitionId(), user.getUserId(), 1);
 
-		// Get list of values ​​with user without permission
+		// Get list of values with user without permission
 
 		user = UserTestUtil.addUser();
 
