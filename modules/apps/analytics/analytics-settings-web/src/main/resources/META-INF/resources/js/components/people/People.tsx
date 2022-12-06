@@ -95,6 +95,7 @@ const People: React.FC = () => {
 		<>
 			<div className="my-5">
 				<ClayToggle
+					data-testid={`sync-all-contacts-and-accounts__${syncAll}`}
 					label={Liferay.Language.get(
 						'sync-all-contacts-and-accounts'
 					)}
@@ -128,6 +129,7 @@ const People: React.FC = () => {
 				<ClayPanel.Body>
 					<div className="mb-4 mt-3">
 						<ClayToggle
+							data-testid={`sync-all-contacts__${syncAllContacts}`}
 							label={Liferay.Language.get('sync-all-contacts')}
 							onToggle={async () => {
 								const {
@@ -231,6 +233,7 @@ const People: React.FC = () => {
 				<ClayPanel.Body>
 					<div className="mb-4 mt-3">
 						<ClayToggle
+							data-testid={`sync-all-accounts__${syncAllAccounts}`}
 							label={Liferay.Language.get('sync-all-accounts')}
 							onToggle={async () => {
 								await updateAttributesConfiguration({
