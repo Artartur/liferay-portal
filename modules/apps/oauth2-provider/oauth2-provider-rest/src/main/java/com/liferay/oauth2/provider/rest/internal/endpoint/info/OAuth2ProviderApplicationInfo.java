@@ -41,12 +41,12 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = OAuth2ProviderApplicationInfo.class
 )
-@Path("/application-info")
+@Path("/application")
 public class OAuth2ProviderApplicationInfo {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response info(
+	public Response get(
 		@QueryParam("externalReferenceCode") String externalReferenceCode) {
 
 		OAuth2Application oAuth2Application = null;
@@ -62,8 +62,6 @@ public class OAuth2ProviderApplicationInfo {
 		if (oAuth2Application == null) {
 			return Response.status(
 				Response.Status.BAD_REQUEST
-			).entity(
-				"Invalid externalReferenceCode"
 			).type(
 				MediaType.TEXT_PLAIN
 			).build();
