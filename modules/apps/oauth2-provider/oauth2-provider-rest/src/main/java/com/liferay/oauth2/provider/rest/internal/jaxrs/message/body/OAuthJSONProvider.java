@@ -12,15 +12,13 @@
  * details.
  */
 
-package com.liferay.oauth2.provider.rest.internal.endpoint.json.message.body;
+package com.liferay.oauth2.provider.rest.internal.jaxrs.message.body;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
-
-import org.apache.cxf.rs.security.oauth2.provider.OAuthJSONProvider;
 
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Component;
@@ -41,5 +39,6 @@ import org.osgi.service.component.annotations.ServiceScope;
 @Consumes("application/json")
 @Produces("application/json")
 @Provider
-public class OAuthJSONProviderComponent extends OAuthJSONProvider {
+public class OAuthJSONProvider
+	extends org.apache.cxf.rs.security.oauth2.provider.OAuthJSONProvider {
 }

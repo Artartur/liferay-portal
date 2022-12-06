@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.oauth2.provider.rest.internal.endpoint.authorize.container.request.filter;
+package com.liferay.oauth2.provider.rest.internal.jaxrs.container.request.filter;
 
 import com.liferay.oauth2.provider.model.OAuth2Application;
 import com.liferay.oauth2.provider.rest.internal.endpoint.authorize.configuration.AuthorizeScreenConfiguration;
@@ -77,7 +77,7 @@ import org.osgi.service.component.annotations.Reference;
 @PreMatching
 @Priority(Priorities.AUTHENTICATION)
 @Provider
-public class AuthorizationCodeGrantServiceContainerRequestFilter
+public class AuthorizationCodeGrantContainerRequestFilter
 	implements ContainerRequestFilter {
 
 	@Override
@@ -301,7 +301,7 @@ public class AuthorizationCodeGrantServiceContainerRequestFilter
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		AuthorizationCodeGrantServiceContainerRequestFilter.class);
+		AuthorizationCodeGrantContainerRequestFilter.class);
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;

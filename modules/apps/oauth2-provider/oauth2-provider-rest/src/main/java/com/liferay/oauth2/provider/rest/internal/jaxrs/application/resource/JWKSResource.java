@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.oauth2.provider.rest.internal.endpoint.jwks;
+package com.liferay.oauth2.provider.rest.internal.jaxrs.application.resource;
 
 import com.liferay.oauth2.provider.rest.internal.configuration.OAuth2AuthorizationServerConfiguration;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
@@ -45,10 +45,10 @@ import org.osgi.service.component.annotations.ConfigurationPolicy;
 		"osgi.jaxrs.application.select=(osgi.jaxrs.name=Liferay.OAuth2.Application)",
 		"osgi.jaxrs.name=Liferay.Authorization.JWKS", "osgi.jaxrs.resource=true"
 	},
-	service = LiferayJWKSService.class
+	service = JWKSResource.class
 )
 @Path("/jwks")
-public class LiferayJWKSService extends JwksService {
+public class JWKSResource extends JwksService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
