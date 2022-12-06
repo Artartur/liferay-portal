@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.oauth2.provider.rest.internal.endpoint.info;
+package com.liferay.oauth2.provider.rest.internal.jaxrs.application.resource;
 
 import com.liferay.oauth2.provider.model.OAuth2Application;
 import com.liferay.oauth2.provider.service.OAuth2ApplicationLocalService;
@@ -39,10 +39,10 @@ import org.osgi.service.component.annotations.Reference;
 		"osgi.jaxrs.name=Liferay.Authorization.Application.Info",
 		"osgi.jaxrs.resource=true"
 	},
-	service = OAuth2ProviderApplicationInfo.class
+	service = ApplicationResource.class
 )
 @Path("/application")
-public class OAuth2ProviderApplicationInfo {
+public class ApplicationResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

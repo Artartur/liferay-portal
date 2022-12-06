@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.oauth2.provider.rest.internal.endpoint.redirect;
+package com.liferay.oauth2.provider.rest.internal.jaxrs.application.resource;
 
 import com.liferay.petra.string.StringBundler;
 
@@ -36,14 +36,14 @@ import org.osgi.service.component.annotations.Component;
 		"osgi.jaxrs.name=Liferay.Authorization.Redirect",
 		"osgi.jaxrs.resource=true"
 	},
-	service = OAuth2ProviderApplicationRedirect.class
+	service = RedirectResource.class
 )
 @Path("/redirect")
-public class OAuth2ProviderApplicationRedirect {
+public class RedirectResource {
 
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public Response redirect(
+	public Response get(
 		@DefaultValue("") @Encoded @QueryParam("code") String code,
 		@DefaultValue("") @Encoded @QueryParam("error") String error) {
 
