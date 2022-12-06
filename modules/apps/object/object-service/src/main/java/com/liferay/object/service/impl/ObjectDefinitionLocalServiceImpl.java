@@ -201,13 +201,7 @@ public class ObjectDefinitionLocalServiceImpl
 			ObjectEntryTable.INSTANCE.objectEntryId.getName(),
 			objectDefinition.isSystem(), userId);
 
-		// _setTitleObjectFieldId must be called after adding all object fields.
-		// However, to add the object fields, the object definition must already
-		// be persisted.
-
-		_setTitleObjectFieldId(objectDefinition, null);
-
-		return objectDefinitionPersistence.update(objectDefinition);
+		return _updateTitleObjectFieldId(objectDefinition, null);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -921,13 +915,8 @@ public class ObjectDefinitionLocalServiceImpl
 			}
 		}
 
-		// _setTitleObjectFieldId must be called after adding all object fields.
-		// However, to add the object fields, the object definition must already
-		// be persisted.
-
-		_setTitleObjectFieldId(objectDefinition, titleObjectFieldName);
-
-		objectDefinition = objectDefinitionPersistence.update(objectDefinition);
+		objectDefinition = _updateTitleObjectFieldId(
+			objectDefinition, titleObjectFieldName);
 
 		if (system) {
 			_createTable(
@@ -1157,25 +1146,6 @@ public class ObjectDefinitionLocalServiceImpl
 		}
 	}
 
-	private void _setTitleObjectFieldId(
-			ObjectDefinition objectDefinition, String titleObjectFieldName)
-		throws PortalException {
-
-		if (Validator.isNull(titleObjectFieldName)) {
-			titleObjectFieldName = "id";
-		}
-
-		ObjectField objectField = _objectFieldPersistence.findByODI_N(
-			objectDefinition.getObjectDefinitionId(), titleObjectFieldName);
-
-		if (objectDefinition.isSystem()) {
-			_validateObjectFieldId(
-				objectDefinition, objectField.getObjectFieldId());
-		}
-
-		objectDefinition.setTitleObjectFieldId(objectField.getObjectFieldId());
-	}
-
 	private ObjectDefinition _updateObjectDefinition(
 			String externalReferenceCode, ObjectDefinition objectDefinition,
 			long accountEntryRestrictedObjectFieldId,
@@ -1301,6 +1271,25 @@ public class ObjectDefinitionLocalServiceImpl
 		}
 
 		return objectDefinition;
+	}
+
+	private ObjectDefinition _updateTitleObjectFieldId(
+			ObjectDefinition objectDefinition, String titleObjectFieldName)
+		throws PortalException {
+
+		if (Validator.isNull(titleObjectFieldName)) {
+			titleObjectFieldName = "id";
+		}
+
+		ObjectField objectField = _objectFieldPersistence.findByODI_N(
+			objectDefinition.getObjectDefinitionId(), titleObjectFieldName);
+
+		_validateObjectFieldId(
+			objectDefinition, objectField.getObjectFieldId());
+
+		objectDefinition.setTitleObjectFieldId(objectField.getObjectFieldId());
+
+		return objectDefinitionPersistence.update(objectDefinition);
 	}
 
 	private void _updateWorkflowInstances(ObjectDefinition objectDefinition)
