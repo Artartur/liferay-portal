@@ -89,16 +89,15 @@ public class DocumentLibraryConvertProcessTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_defaultStore = ReflectionTestUtil.getAndSetFieldValue(
-			StoreFactory.class, "_store", _fileSystemStore);
-
-		_group = GroupTestUtil.addGroup();
-
 		_convertProcess = ConvertProcessUtil.getConvertProcess(
 			DocumentLibraryConvertProcess.class.getName());
 
 		_convertProcess.setParameterValues(
 			new String[] {_CLASS_NAME_DB_STORE, Boolean.TRUE.toString()});
+
+		_defaultStore = ReflectionTestUtil.getAndSetFieldValue(
+			StoreFactory.class, "_store", _fileSystemStore);
+		_group = GroupTestUtil.addGroup();
 	}
 
 	@After
