@@ -20,7 +20,7 @@ import com.liferay.knowledge.base.internal.upgrade.v3_0_0.util.KBArticleTable;
 import com.liferay.knowledge.base.internal.upgrade.v3_0_0.util.KBCommentTable;
 import com.liferay.knowledge.base.internal.upgrade.v3_0_0.util.KBFolderTable;
 import com.liferay.knowledge.base.internal.upgrade.v3_0_0.util.KBTemplateTable;
-import com.liferay.knowledge.base.internal.upgrade.v4_4_0.RSSConfigurationUpgradeProcess;
+import com.liferay.knowledge.base.internal.upgrade.v4_4_0.KBGroupServiceConfigurationUpgradeProcess;
 import com.liferay.knowledge.base.model.KBArticle;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.service.CompanyLocalService;
@@ -186,7 +186,7 @@ public class KnowledgeBaseServiceUpgradeStepRegistrator
 
 		registry.register(
 			"4.3.0", "4.4.0",
-			new RSSConfigurationUpgradeProcess(_configurationAdmin));
+			new KBGroupServiceConfigurationUpgradeProcess(_configurationAdmin));
 	}
 
 	@Reference
