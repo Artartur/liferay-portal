@@ -37,6 +37,7 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import javax.servlet.Servlet;
 import javax.servlet.http.HttpServlet;
@@ -71,12 +72,14 @@ public class JSResolveModulesServlet
 	extends HttpServlet implements NPMRegistryUpdatesListener {
 
 	public String getURL() {
-		return _state.url;
+		State state = _state.get();
+
+		return state.url;
 	}
 
 	@Override
 	public void onAfterUpdate() {
-		_updateState(_npmRegistry);
+		_updateState(_npmRegistry.get());
 	}
 
 	@Activate
@@ -92,7 +95,7 @@ public class JSResolveModulesServlet
 					NPMRegistry npmRegistry = bundleContext.getService(
 						serviceReference);
 
-					_npmRegistry = npmRegistry;
+					_npmRegistry.set(npmRegistry);
 
 					_updateState(npmRegistry);
 
@@ -110,7 +113,7 @@ public class JSResolveModulesServlet
 					ServiceReference<NPMRegistry> serviceReference,
 					NPMRegistry npmRegistry) {
 
-					_npmRegistry = null;
+					_npmRegistry.set(null);
 
 					_updateState(null);
 				}
@@ -131,7 +134,7 @@ public class JSResolveModulesServlet
 			HttpServletResponse httpServletResponse)
 		throws IOException {
 
-		State state = _state;
+		State state = _state.get();
 
 		if (state == null) {
 			httpServletResponse.sendError(
@@ -209,7 +212,7 @@ public class JSResolveModulesServlet
 
 	private void _updateState(NPMRegistry npmRegistry) {
 		if (npmRegistry == null) {
-			_state = null;
+			_state.set(null);
 
 			return;
 		}
@@ -217,7 +220,7 @@ public class JSResolveModulesServlet
 		NPMRegistryResolutionStateDigest npmRegistryResolutionStateDigest =
 			new NPMRegistryResolutionStateDigest(npmRegistry);
 
-		_state = new State(npmRegistryResolutionStateDigest.getDigest());
+		_state.set(new State(npmRegistryResolutionStateDigest.getDigest()));
 	}
 
 	@Reference
@@ -226,9 +229,10 @@ public class JSResolveModulesServlet
 	@Reference
 	private BrowserModulesResolver _browserModulesResolver;
 
-	private volatile NPMRegistry _npmRegistry;
+	private final AtomicReference<NPMRegistry> _npmRegistry =
+		new AtomicReference<>();
 	private ServiceTracker<NPMRegistry, NPMRegistry> _serviceTracker;
-	private volatile State _state;
+	private final AtomicReference<State> _state = new AtomicReference<>();
 
 	private static class State {
 
