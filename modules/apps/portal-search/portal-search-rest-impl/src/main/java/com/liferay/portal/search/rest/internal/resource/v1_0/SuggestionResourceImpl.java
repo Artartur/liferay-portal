@@ -86,6 +86,11 @@ public class SuggestionResourceImpl extends BaseSuggestionResourceImpl {
 		LiferayRenderRequest liferayRenderRequest = _createLiferayRenderRequest(
 			currentURL, plid);
 
+		if (!StringUtil.startsWith(destinationFriendlyURL, CharPool.SLASH)) {
+			destinationFriendlyURL = StringPool.SLASH.concat(
+				destinationFriendlyURL);
+		}
+
 		return Page.of(
 			transform(
 				_suggestionsRetriever.getSuggestionsContributorResults(
@@ -93,7 +98,7 @@ public class SuggestionResourceImpl extends BaseSuggestionResourceImpl {
 					RenderResponseFactory.create(
 						contextHttpServletResponse, liferayRenderRequest),
 					_createSearchContext(
-						_slashify(destinationFriendlyURL), _getGroupId(groupId),
+						destinationFriendlyURL, _getGroupId(groupId),
 						keywordsParameterName, scope, search,
 						suggestionsContributorConfigurations)),
 				suggestionsContributorResult ->
@@ -228,14 +233,6 @@ public class SuggestionResourceImpl extends BaseSuggestionResourceImpl {
 		catch (PortalException portalException) {
 			throw new RuntimeException(portalException);
 		}
-	}
-
-	private String _slashify(String s) {
-		if (s.charAt(0) == CharPool.SLASH) {
-			return s;
-		}
-
-		return StringPool.SLASH.concat(s);
 	}
 
 	@Reference
