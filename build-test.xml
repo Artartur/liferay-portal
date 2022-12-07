@@ -11217,9 +11217,9 @@ enterprise.product.notification.enabled=false
 
 company.security.strangers.verify=false
 
-browser.launcher.url=
-
 default.admin.password=test
+
+browser.launcher.url=
 
 setup.wizard.enabled=false
 
