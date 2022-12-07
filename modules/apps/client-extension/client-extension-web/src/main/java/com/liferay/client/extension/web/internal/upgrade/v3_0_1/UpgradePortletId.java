@@ -12,8 +12,9 @@
  * details.
  */
 
-package com.liferay.client.extension.web.internal.upgrade.v3_0_0;
+package com.liferay.client.extension.web.internal.upgrade.v3_0_1;
 
+import com.liferay.client.extension.web.internal.util.CETUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
@@ -40,8 +41,9 @@ public class UpgradePortletId extends BasePortletIdUpgradeProcess {
 					"ClientExtensionEntry")) {
 
 			while (resultSet.next()) {
-				String externalReferenceCode = resultSet.getString(
-					"externalReferenceCode");
+				String externalReferenceCode =
+					CETUtil.normalizeExternalReferenceCodeForPortletId(
+						resultSet.getString("externalReferenceCode"));
 
 				runSQL(
 					StringBundler.concat(
@@ -84,8 +86,9 @@ public class UpgradePortletId extends BasePortletIdUpgradeProcess {
 					"ClientExtensionEntry")) {
 
 			while (resultSet.next()) {
-				String externalReferenceCode = resultSet.getString(
-					"externalReferenceCode");
+				String externalReferenceCode =
+					CETUtil.normalizeExternalReferenceCodeForPortletId(
+						resultSet.getString("externalReferenceCode"));
 
 				portletIds.add(
 					new String[] {
