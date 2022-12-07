@@ -100,7 +100,7 @@ public class MessageBoardMessageDTOConverter
 					AssetTag.NAME_ACCESSOR);
 				messageBoardSectionId = mbMessage.getCategoryId();
 				messageBoardThreadId = mbMessage.getThreadId();
-				modified = _modified(mbMessage);
+				modified = mbMessage.getMvccVersion() > 1;
 				numberOfMessageBoardAttachments =
 					mbMessage.getAttachmentsFileEntriesCount();
 				numberOfMessageBoardMessages =
@@ -157,14 +157,6 @@ public class MessageBoardMessageDTOConverter
 					});
 			}
 		};
-	}
-
-	private boolean _modified(MBMessage mbMessage) {
-		if (mbMessage.getMvccVersion() > 1) {
-			return true;
-		}
-
-		return false;
 	}
 
 	@Reference
