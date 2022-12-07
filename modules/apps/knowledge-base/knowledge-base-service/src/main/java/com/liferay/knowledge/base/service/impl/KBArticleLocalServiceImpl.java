@@ -503,7 +503,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 
 		kbArticleLocalService.updateKBArticle(kbArticle);
 
-		return kbArticleLocalService.updateStatus(
+		return updateStatus(
 			userId, resourcePrimKey, WorkflowConstants.STATUS_EXPIRED,
 			serviceContext);
 	}
@@ -1631,7 +1631,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 						kbArticle.getExpirationDate()));
 			}
 
-			kbArticleLocalService.updateStatus(
+			updateStatus(
 				userId, kbArticle.getResourcePrimKey(),
 				WorkflowConstants.STATUS_EXPIRED, serviceContext);
 		}
