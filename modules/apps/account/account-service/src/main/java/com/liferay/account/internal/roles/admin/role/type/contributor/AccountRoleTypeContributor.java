@@ -126,7 +126,7 @@ public class AccountRoleTypeContributor implements RoleTypeContributor {
 				accountRoleBaseModelSearchResult.getLength());
 		}
 		catch (Exception exception) {
-			_log.error("Error while searching account roles", exception);
+			_log.error(exception);
 
 			return new BaseModelSearchResult<>(
 				Collections.<Role>emptyList(), 0);
