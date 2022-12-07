@@ -145,6 +145,10 @@ public class ${schemaName} <#if dtoParentClassName?has_content>extends ${dtoPare
 			@DecimalMin("${propertySchema.minimum}")
 		</#if>
 
+		<#if propertySchema.jsonMap>
+			@JsonAnyGetter
+		</#if>
+
 		<#if propertySchema.maxLength??>
 			<#assign sizeParameters = sizeParameters + ["max = ${propertySchema.maxLength}"] />
 		</#if>
@@ -155,10 +159,6 @@ public class ${schemaName} <#if dtoParentClassName?has_content>extends ${dtoPare
 
 		<#if sizeParameters?has_content>
 			@Size(${sizeParameters?join(", ")})
-		</#if>
-
-		<#if propertySchema.jsonMap>
-			@JsonAnyGetter
 		</#if>
 
 		@Schema(
