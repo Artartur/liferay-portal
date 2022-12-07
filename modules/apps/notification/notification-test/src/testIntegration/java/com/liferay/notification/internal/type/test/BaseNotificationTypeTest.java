@@ -70,9 +70,9 @@ public class BaseNotificationTypeTest {
 		NotificationType notificationType =
 			_notificationTypeServiceTracker.getNotificationType(type);
 
-		if (notificationType == null) {
-			Assert.fail("There is no notificationType with type " + type);
-		}
+		Assert.assertNotNull(
+			"There is no notification type with type " + type,
+			notificationType);
 
 		notificationType.sendNotification(notificationContext);
 	}
