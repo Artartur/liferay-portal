@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Portlet;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 
 import org.osgi.service.component.annotations.Component;
@@ -50,7 +51,10 @@ public class PortalCompanyLogPanelApp extends BasePanelApp {
 	public boolean isShow(PermissionChecker permissionChecker, Group group)
 		throws PortalException {
 
-		if (!GetterUtil.getBoolean(PropsUtil.get("feature.flag.LPS-170670"))) {
+		if (!GetterUtil.getBoolean(
+				PropsUtil.get(PropsKeys.COMPANY_LOG_ENABLED)) ||
+			!GetterUtil.getBoolean(PropsUtil.get("feature.flag.LPS-170670"))) {
+
 			return false;
 		}
 
