@@ -111,18 +111,18 @@ public class UpgradePortletIdTest {
 				TestPropsValues.getUserId(), layout, oldPortletId,
 				"column-1", new HashMap<>());
 
-			PortletPreferences portletPreferencesBeforeUpgrade =
+			PortletPreferences oldPortletPreferences =
 				_portletPreferencesLocalService.fetchPortletPreferences(
 					PortletKeys.PREFS_OWNER_ID_DEFAULT,
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
 					oldPortletId);
 
-			Assert.assertNotNull(portletPreferencesBeforeUpgrade);
+			Assert.assertNotNull(oldPortletPreferences);
 
 			Assert.assertEquals(
 				"Assert the portletPreferences portletId before upgrade",
 				oldPortletId,
-				portletPreferencesBeforeUpgrade.getPortletId());
+				oldPortletPreferences.getPortletId());
 
 			UpgradeProcess upgradeProcess = _getUpgradeProcess();
 
@@ -134,26 +134,24 @@ public class UpgradePortletIdTest {
 
 			_portletPreferencesPersistence.clearCache();
 
-			PortletPreferences portletPreferencesWithOldId =
+			Assert.assertNull(
 				_portletPreferencesLocalService.fetchPortletPreferences(
 					PortletKeys.PREFS_OWNER_ID_DEFAULT,
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-					oldPortletId);
+					oldPortletId));
 
-			Assert.assertNull(portletPreferencesWithOldId);
-
-			PortletPreferences portletPreferencesWithNewId =
+			PortletPreferences newPortletPreferences =
 				_portletPreferencesLocalService.fetchPortletPreferences(
 					PortletKeys.PREFS_OWNER_ID_DEFAULT,
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
 					newPortletId);
 
-			Assert.assertNotNull(portletPreferencesWithNewId);
+			Assert.assertNotNull(newPortletPreferences);
 
 			Assert.assertEquals(
 				"Assert the portletPreferences portletId after upgrade",
 				newPortletId,
-				portletPreferencesWithNewId.getPortletId());
+				newPortletPreferences.getPortletId());
 		}
 		finally {
 			serviceRegistration.unregister();
