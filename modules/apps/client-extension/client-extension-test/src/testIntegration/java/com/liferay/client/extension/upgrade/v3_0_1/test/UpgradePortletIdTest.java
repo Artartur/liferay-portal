@@ -97,8 +97,6 @@ public class UpgradePortletIdTest {
 				"urls", "http://" + RandomTestUtil.randomString() + ".com"
 			).buildString());
 
-		UpgradeProcess upgradeProcess = _getUpgradeProcess();
-
 		String externalReferenceCodeForPortletIdNormalized =
 			"3b2b53fb_f264_f234_49d8_8d434d048e75_TEST";
 
@@ -125,6 +123,8 @@ public class UpgradePortletIdTest {
 				"Assert the portletPreferences portletId before upgrade",
 				portletIdWithoutCompanyId,
 				portletPreferencesBeforeUpgrade.getPortletId());
+
+			UpgradeProcess upgradeProcess = _getUpgradeProcess();
 
 			upgradeProcess.upgrade();
 
