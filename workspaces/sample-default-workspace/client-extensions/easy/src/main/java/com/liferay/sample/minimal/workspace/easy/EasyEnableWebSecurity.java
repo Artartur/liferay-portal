@@ -73,7 +73,7 @@ public class EasyEnableWebSecurity {
 				"DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"));
 		corsConfiguration.setAllowedOrigins(
 			Stream.of(
-				_dxpDomains.split("\\s*[,\n]\\s*")
+				_lxcDXPDomains.split("\\s*[,\n]\\s*")
 			).map(
 				String::trim
 			).map(
@@ -170,7 +170,7 @@ public class EasyEnableWebSecurity {
 						"Unable to get client ID: " + throwable.getMessage());
 				}
 
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 			}
 		}
 	}
@@ -179,7 +179,7 @@ public class EasyEnableWebSecurity {
 		EasyEnableWebSecurity.class);
 
 	@Value("${dxp.domains}")
-	private String _dxpDomains;
+	private String _lxcDXPDomains;
 
 	private static class ApplicationInfo {
 
@@ -200,11 +200,11 @@ public class EasyEnableWebSecurity {
 				return OAuth2TokenValidatorResult.success();
 			}
 
-			return OAuth2TokenValidatorResult.failure(_oAuth2Error);
+			return OAuth2TokenValidatorResult.failure(_noClientIdMatch);
 		}
 
 		private final String _clientId;
-		private final OAuth2Error _oAuth2Error = new OAuth2Error(
+		private final OAuth2Error _noClientIdMatch = new OAuth2Error(
 			"invalid_token", "The client_id does not match", null);
 
 	}
