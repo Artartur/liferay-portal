@@ -77,10 +77,8 @@ public class UpgradePortletIdTest {
 
 		Layout layout = LayoutTestUtil.addTypePortletLayout(group.getGroupId());
 
-		long companyId = layout.getCompanyId();
-
 		_addClientExtensionEntry(
-			"3b2b53fb-f264-f234-49d8-8d434d048e75-TEST", companyId);
+			"3b2b53fb-f264-f234-49d8-8d434d048e75-TEST", group.getCompanyId());
 
 		UpgradeProcess upgradeProcess = _getUpgradeProcess();
 
@@ -114,7 +112,7 @@ public class UpgradePortletIdTest {
 			upgradeProcess.upgrade();
 
 			String newPortletIdWithCompanyId = StringBundler.concat(
-				_PORTLET_ID_PREFIX, companyId, StringPool.UNDERLINE,
+				_PORTLET_ID_PREFIX, group.getCompanyId(), StringPool.UNDERLINE,
 				externalReferenceCodeForPortletIdNormalized);
 
 			_portletPreferencesPersistence.clearCache();
