@@ -108,8 +108,8 @@ public class UpgradePortletIdTest {
 
 		try {
 			LayoutTestUtil.addPortletToLayout(
-				TestPropsValues.getUserId(), layout, oldPortletId,
-				"column-1", new HashMap<>());
+				TestPropsValues.getUserId(), layout, oldPortletId, "column-1",
+				new HashMap<>());
 
 			PortletPreferences oldPortletPreferences =
 				_portletPreferencesLocalService.fetchPortletPreferences(
@@ -121,8 +121,7 @@ public class UpgradePortletIdTest {
 
 			Assert.assertEquals(
 				"Assert the portletPreferences portletId before upgrade",
-				oldPortletId,
-				oldPortletPreferences.getPortletId());
+				oldPortletId, oldPortletPreferences.getPortletId());
 
 			UpgradeProcess upgradeProcess = _getUpgradeProcess();
 
@@ -150,8 +149,7 @@ public class UpgradePortletIdTest {
 
 			Assert.assertEquals(
 				"Assert the portletPreferences portletId after upgrade",
-				newPortletId,
-				newPortletPreferences.getPortletId());
+				newPortletId, newPortletPreferences.getPortletId());
 		}
 		finally {
 			serviceRegistration.unregister();
