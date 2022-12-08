@@ -75,8 +75,6 @@ public class UpgradePortletIdTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		Layout layout = LayoutTestUtil.addTypePortletLayout(group.getGroupId());
-
 		_clientExtensionEntryLocalService.addClientExtensionEntry(
 			"3b2b53fb-f264-f234-49d8-8d434d048e75-TEST",
 			TestPropsValues.getUserId(), StringPool.BLANK,
@@ -107,6 +105,9 @@ public class UpgradePortletIdTest {
 			oldPortletId);
 
 		try {
+			Layout layout = LayoutTestUtil.addTypePortletLayout(
+				group.getGroupId());
+
 			LayoutTestUtil.addPortletToLayout(
 				TestPropsValues.getUserId(), layout, oldPortletId, "column-1",
 				new HashMap<>());
