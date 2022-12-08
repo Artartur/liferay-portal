@@ -71,7 +71,7 @@ public class UpgradePortletIdTest {
 
 	@Test
 	public void testDoUpgrade() throws Exception {
-		UserTestUtil.setUser(TestPropsValues.getUser());
+		//UserTestUtil.setUser(TestPropsValues.getUser());
 
 		Group group = GroupTestUtil.addGroup();
 
