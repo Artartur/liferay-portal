@@ -170,7 +170,7 @@ public class EasyEnableWebSecurity {
 						"Unable to get client ID: " + throwable.getMessage());
 				}
 
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 			}
 		}
 	}
