@@ -77,8 +77,25 @@ public class UpgradePortletIdTest {
 
 		Layout layout = LayoutTestUtil.addTypePortletLayout(group.getGroupId());
 
-		_addClientExtensionEntry(
-			"3b2b53fb-f264-f234-49d8-8d434d048e75-TEST", group.getCompanyId());
+		_clientExtensionEntryLocalService.addClientExtensionEntry(
+			"3b2b53fb-f264-f234-49d8-8d434d048e75-TEST",
+			TestPropsValues.getUserId(), StringPool.BLANK,
+			Collections.singletonMap(
+				LocaleUtil.fromLanguageId(
+					UpgradeProcessUtil.getDefaultLanguageId(
+						group.getCompanyId())),
+				RandomTestUtil.randomString()),
+			StringPool.BLANK, StringPool.BLANK,
+			ClientExtensionEntryConstants.TYPE_CUSTOM_ELEMENT,
+			UnicodePropertiesBuilder.create(
+				true
+			).put(
+				"htmlElementName", "valid-html-element-name"
+			).put(
+				"instanceable", false
+			).put(
+				"urls", "http://" + RandomTestUtil.randomString() + ".com"
+			).buildString());
 
 		UpgradeProcess upgradeProcess = _getUpgradeProcess();
 
@@ -141,30 +158,6 @@ public class UpgradePortletIdTest {
 		finally {
 			serviceRegistration.unregister();
 		}
-	}
-
-	private void _addClientExtensionEntry(
-			String clientExtensionEntryErc, long companyId)
-		throws Exception {
-
-		_clientExtensionEntryLocalService.addClientExtensionEntry(
-			clientExtensionEntryErc, TestPropsValues.getUserId(),
-			StringPool.BLANK,
-			Collections.singletonMap(
-				LocaleUtil.fromLanguageId(
-					UpgradeProcessUtil.getDefaultLanguageId(companyId)),
-				RandomTestUtil.randomString()),
-			StringPool.BLANK, StringPool.BLANK,
-			ClientExtensionEntryConstants.TYPE_CUSTOM_ELEMENT,
-			UnicodePropertiesBuilder.create(
-				true
-			).put(
-				"htmlElementName", "valid-html-element-name"
-			).put(
-				"instanceable", false
-			).put(
-				"urls", "http://" + RandomTestUtil.randomString() + ".com"
-			).buildString());
 	}
 
 	private UpgradeProcess _getUpgradeProcess() {
