@@ -118,9 +118,7 @@ public class UpgradePortletIdTest {
 					oldPortletId);
 
 			Assert.assertNotNull(oldPortletPreferences);
-
 			Assert.assertEquals(
-				"Assert the portletPreferences portletId before upgrade",
 				oldPortletId, oldPortletPreferences.getPortletId());
 
 			UpgradeProcess upgradeProcess = _getUpgradeProcess();
@@ -147,7 +145,6 @@ public class UpgradePortletIdTest {
 
 			Assert.assertNotNull(newPortletPreferences);
 			Assert.assertEquals(
-				"Assert the portletPreferences portletId after upgrade",
 				newPortletId, newPortletPreferences.getPortletId());
 		}
 		finally {
