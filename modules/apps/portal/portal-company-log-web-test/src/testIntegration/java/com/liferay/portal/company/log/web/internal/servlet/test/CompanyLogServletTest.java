@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.company.log.servlet.test;
+package com.liferay.portal.company.log.web.internal.servlet.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.petra.io.StreamUtil;
@@ -517,7 +517,7 @@ public class CompanyLogServletTest {
 		new MockHttpServletResponse();
 
 	@Inject(
-		filter = "osgi.http.whiteboard.servlet.name=com.liferay.portal.company.log.internal.servlet.CompanyLogServlet"
+		filter = "osgi.http.whiteboard.servlet.name=com.liferay.portal.company.log.web.internal.servlet.CompanyLogServlet"
 	)
 	private Servlet _servlet;
 

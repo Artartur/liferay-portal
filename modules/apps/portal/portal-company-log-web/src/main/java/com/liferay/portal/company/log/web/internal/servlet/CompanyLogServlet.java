@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.company.log.internal.servlet;
+package com.liferay.portal.company.log.web.internal.servlet;
 
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
@@ -69,7 +69,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	enabled = false,
 	property = {
-		"osgi.http.whiteboard.servlet.name=com.liferay.portal.company.log.internal.servlet.CompanyLogServlet",
+		"osgi.http.whiteboard.servlet.name=com.liferay.portal.company.log.web.internal.servlet.CompanyLogServlet",
 		"osgi.http.whiteboard.servlet.pattern=/company-log/*",
 		"servlet.init.httpMethods=GET"
 	},

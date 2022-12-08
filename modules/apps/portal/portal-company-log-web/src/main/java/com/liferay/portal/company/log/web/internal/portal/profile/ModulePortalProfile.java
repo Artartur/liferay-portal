@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.company.log.internal.portal.profile;
+package com.liferay.portal.company.log.web.internal.portal.profile;
 
-import com.liferay.portal.company.log.internal.servlet.CompanyLogServlet;
+import com.liferay.portal.company.log.web.internal.servlet.CompanyLogServlet;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Props;
 import com.liferay.portal.kernel.util.PropsKeys;
