@@ -115,7 +115,6 @@ public class ObjectFieldResourceTest extends BaseObjectFieldResourceTestCase {
 		ObjectField objectField1 =
 			testGetObjectDefinitionByExternalReferenceCodeObjectDefinitionExternalReferenceCodeObjectFieldsPage_addObjectField(
 				objectDefinitionExternalReferenceCode, randomObjectField());
-
 		ObjectField objectField2 =
 			testGetObjectDefinitionByExternalReferenceCodeObjectDefinitionExternalReferenceCodeObjectFieldsPage_addObjectField(
 				objectDefinitionExternalReferenceCode, randomObjectField());
@@ -133,7 +132,6 @@ public class ObjectFieldResourceTest extends BaseObjectFieldResourceTestCase {
 		assertValid(page);
 
 		objectFieldResource.deleteObjectField(objectField1.getId());
-
 		objectFieldResource.deleteObjectField(objectField2.getId());
 	}
 
