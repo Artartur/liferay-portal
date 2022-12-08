@@ -101,7 +101,7 @@ public class UpgradePortletIdTest {
 		String oldPortletId =
 			_PORTLET_ID_PREFIX + normalizedExternalReferenceCode;
 
-		ServiceRegistration<Portlet> serviceRegistration = _registerTestPortlet(
+		ServiceRegistration<Portlet> serviceRegistration = _register(
 			oldPortletId);
 
 		try {
@@ -176,7 +176,7 @@ public class UpgradePortletIdTest {
 		return upgradeProcesses[0];
 	}
 
-	private ServiceRegistration<Portlet> _registerTestPortlet(
+	private ServiceRegistration<Portlet> _register(
 		String oldPortletId) {
 
 		Bundle bundle = FrameworkUtil.getBundle(UpgradePortletIdTest.class);
