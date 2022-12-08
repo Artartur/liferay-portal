@@ -21,7 +21,7 @@ function check_blade {
 		exit 1
 	fi
 
-	${BLADE_PATH} update -s > /dev/null
+	#${BLADE_PATH} update -s > /dev/null
 }
 
 function copy_template {
