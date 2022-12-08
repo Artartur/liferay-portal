@@ -97,11 +97,11 @@ public class UpgradePortletIdTest {
 				"urls", "http://" + RandomTestUtil.randomString() + ".com"
 			).buildString());
 
-		String externalReferenceCodeForPortletIdNormalized =
+		String normalizedExternalReferenceCode =
 			"3b2b53fb_f264_f234_49d8_8d434d048e75_TEST";
 
 		String oldPortletId =
-			_PORTLET_ID_PREFIX + externalReferenceCodeForPortletIdNormalized;
+			_PORTLET_ID_PREFIX + normalizedExternalReferenceCode;
 
 		ServiceRegistration<Portlet> serviceRegistration = _registerTestPortlet(
 			oldPortletId);
@@ -129,7 +129,7 @@ public class UpgradePortletIdTest {
 
 			String newPortletId = StringBundler.concat(
 				_PORTLET_ID_PREFIX, group.getCompanyId(), StringPool.UNDERLINE,
-				externalReferenceCodeForPortletIdNormalized);
+				normalizedExternalReferenceCode);
 
 			_portletPreferencesPersistence.clearCache();
 
