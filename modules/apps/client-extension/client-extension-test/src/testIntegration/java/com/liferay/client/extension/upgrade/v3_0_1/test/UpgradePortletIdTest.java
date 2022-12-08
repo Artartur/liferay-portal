@@ -140,13 +140,13 @@ public class UpgradePortletIdTest {
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
 					portletIdWithoutCompanyId);
 
+			Assert.assertNull(portletPreferencesWithOldId);
+
 			PortletPreferences portletPreferencesWithNewId =
 				_portletPreferencesLocalService.fetchPortletPreferences(
 					PortletKeys.PREFS_OWNER_ID_DEFAULT,
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
 					newPortletIdWithCompanyId);
-
-			Assert.assertNull(portletPreferencesWithOldId);
 
 			Assert.assertNotNull(portletPreferencesWithNewId);
 
