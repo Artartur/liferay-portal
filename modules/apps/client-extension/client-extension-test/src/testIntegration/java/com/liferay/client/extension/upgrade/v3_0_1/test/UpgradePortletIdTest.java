@@ -100,35 +100,35 @@ public class UpgradePortletIdTest {
 		String externalReferenceCodeForPortletIdNormalized =
 			"3b2b53fb_f264_f234_49d8_8d434d048e75_TEST";
 
-		String portletIdWithoutCompanyId =
+		String oldPortletId =
 			_PORTLET_ID_PREFIX + externalReferenceCodeForPortletIdNormalized;
 
 		ServiceRegistration<Portlet> serviceRegistration = _registerTestPortlet(
-			portletIdWithoutCompanyId);
+			oldPortletId);
 
 		try {
 			LayoutTestUtil.addPortletToLayout(
-				TestPropsValues.getUserId(), layout, portletIdWithoutCompanyId,
+				TestPropsValues.getUserId(), layout, oldPortletId,
 				"column-1", new HashMap<>());
 
 			PortletPreferences portletPreferencesBeforeUpgrade =
 				_portletPreferencesLocalService.fetchPortletPreferences(
 					PortletKeys.PREFS_OWNER_ID_DEFAULT,
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-					portletIdWithoutCompanyId);
+					oldPortletId);
 
 			Assert.assertNotNull(portletPreferencesBeforeUpgrade);
 
 			Assert.assertEquals(
 				"Assert the portletPreferences portletId before upgrade",
-				portletIdWithoutCompanyId,
+				oldPortletId,
 				portletPreferencesBeforeUpgrade.getPortletId());
 
 			UpgradeProcess upgradeProcess = _getUpgradeProcess();
 
 			upgradeProcess.upgrade();
 
-			String newPortletIdWithCompanyId = StringBundler.concat(
+			String newPortletId = StringBundler.concat(
 				_PORTLET_ID_PREFIX, group.getCompanyId(), StringPool.UNDERLINE,
 				externalReferenceCodeForPortletIdNormalized);
 
@@ -138,7 +138,7 @@ public class UpgradePortletIdTest {
 				_portletPreferencesLocalService.fetchPortletPreferences(
 					PortletKeys.PREFS_OWNER_ID_DEFAULT,
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-					portletIdWithoutCompanyId);
+					oldPortletId);
 
 			Assert.assertNull(portletPreferencesWithOldId);
 
@@ -146,13 +146,13 @@ public class UpgradePortletIdTest {
 				_portletPreferencesLocalService.fetchPortletPreferences(
 					PortletKeys.PREFS_OWNER_ID_DEFAULT,
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-					newPortletIdWithCompanyId);
+					newPortletId);
 
 			Assert.assertNotNull(portletPreferencesWithNewId);
 
 			Assert.assertEquals(
 				"Assert the portletPreferences portletId after upgrade",
-				newPortletIdWithCompanyId,
+				newPortletId,
 				portletPreferencesWithNewId.getPortletId());
 		}
 		finally {
@@ -184,7 +184,7 @@ public class UpgradePortletIdTest {
 	}
 
 	private ServiceRegistration<Portlet> _registerTestPortlet(
-		String portletIdWithoutCompanyId) {
+		String oldPortletId) {
 
 		Bundle bundle = FrameworkUtil.getBundle(UpgradePortletIdTest.class);
 
@@ -199,7 +199,7 @@ public class UpgradePortletIdTest {
 			).put(
 				"com.liferay.portlet.preferences-unique-per-layout", true
 			).put(
-				"javax.portlet.name", portletIdWithoutCompanyId
+				"javax.portlet.name", oldPortletId
 			).build());
 	}
 
