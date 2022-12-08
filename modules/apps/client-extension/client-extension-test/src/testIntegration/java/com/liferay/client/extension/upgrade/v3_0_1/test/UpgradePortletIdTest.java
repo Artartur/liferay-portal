@@ -103,7 +103,7 @@ public class UpgradePortletIdTest {
 			"3b2b53fb_f264_f234_49d8_8d434d048e75_TEST";
 
 		String portletIdWithoutCompanyId =
-			_PORTLET_ID_PREFIX + "3b2b53fb_f264_f234_49d8_8d434d048e75_TEST";
+			_PORTLET_ID_PREFIX + externalReferenceCodeForPortletIdNormalized;
 
 		ServiceRegistration<Portlet> serviceRegistration = _registerTestPortlet(
 			portletIdWithoutCompanyId);
