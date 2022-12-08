@@ -127,10 +127,6 @@ public class UpgradePortletIdTest {
 
 			upgradeProcess.upgrade();
 
-			String newPortletId = StringBundler.concat(
-				_PORTLET_ID_PREFIX, group.getCompanyId(), StringPool.UNDERLINE,
-				normalizedExternalReferenceCode);
-
 			_portletPreferencesPersistence.clearCache();
 
 			Assert.assertNull(
@@ -139,6 +135,10 @@ public class UpgradePortletIdTest {
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
 					oldPortletId));
 
+			String newPortletId = StringBundler.concat(
+				_PORTLET_ID_PREFIX, group.getCompanyId(), StringPool.UNDERLINE,
+				normalizedExternalReferenceCode);
+
 			PortletPreferences newPortletPreferences =
 				_portletPreferencesLocalService.fetchPortletPreferences(
 					PortletKeys.PREFS_OWNER_ID_DEFAULT,
@@ -146,7 +146,6 @@ public class UpgradePortletIdTest {
 					newPortletId);
 
 			Assert.assertNotNull(newPortletPreferences);
-
 			Assert.assertEquals(
 				"Assert the portletPreferences portletId after upgrade",
 				newPortletId, newPortletPreferences.getPortletId());
