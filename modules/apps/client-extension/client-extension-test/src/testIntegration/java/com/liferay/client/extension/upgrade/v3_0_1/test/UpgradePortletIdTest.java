@@ -79,8 +79,6 @@ public class UpgradePortletIdTest {
 
 		long companyId = layout.getCompanyId();
 
-		long plid = layout.getPlid();
-
 		_addClientExtensionEntry(
 			"3b2b53fb-f264-f234-49d8-8d434d048e75-TEST", companyId);
 
@@ -103,7 +101,7 @@ public class UpgradePortletIdTest {
 			PortletPreferences portletPreferencesBeforeUpgrade =
 				_portletPreferencesLocalService.fetchPortletPreferences(
 					PortletKeys.PREFS_OWNER_ID_DEFAULT,
-					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid,
+					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
 					portletIdWithoutCompanyId);
 
 			Assert.assertNotNull(portletPreferencesBeforeUpgrade);
@@ -124,13 +122,13 @@ public class UpgradePortletIdTest {
 			PortletPreferences portletPreferencesWithOldId =
 				_portletPreferencesLocalService.fetchPortletPreferences(
 					PortletKeys.PREFS_OWNER_ID_DEFAULT,
-					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid,
+					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
 					portletIdWithoutCompanyId);
 
 			PortletPreferences portletPreferencesWithNewId =
 				_portletPreferencesLocalService.fetchPortletPreferences(
 					PortletKeys.PREFS_OWNER_ID_DEFAULT,
-					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid,
+					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
 					newPortletIdWithCompanyId);
 
 			Assert.assertNull(portletPreferencesWithOldId);
