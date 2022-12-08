@@ -35,8 +35,6 @@ public class MBThreadModelDocumentContributor
 
 	@Override
 	public void contribute(Document document, MBThread mbThread) {
-		document.addDate("lastPostDate", mbThread.getLastPostDate());
-
 		MBDiscussion discussion =
 			mbDiscussionLocalService.fetchThreadDiscussion(
 				mbThread.getThreadId());
@@ -48,6 +46,7 @@ public class MBThreadModelDocumentContributor
 			document.addKeyword("discussion", true);
 		}
 
+		document.addDate("lastPostDate", mbThread.getLastPostDate());
 		document.addKeyword(
 			"participantUserIds", mbThread.getParticipantUserIds());
 	}
