@@ -73,7 +73,7 @@ public class EasyEnableWebSecurity {
 				"DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"));
 		corsConfiguration.setAllowedOrigins(
 			Stream.of(
-				_lxcDXPDomains.split("\\s*[,\n]\\s*")
+				_dxpDomains.split("\\s*[,\n]\\s*")
 			).map(
 				String::trim
 			).map(
@@ -179,7 +179,7 @@ public class EasyEnableWebSecurity {
 		EasyEnableWebSecurity.class);
 
 	@Value("${dxp.domains}")
-	private String _lxcDXPDomains;
+	private String _dxpDomains;
 
 	private static class ApplicationInfo {
 
