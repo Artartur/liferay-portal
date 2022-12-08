@@ -85,6 +85,10 @@ function refresh_sample_default_workspace {
 function refresh_sample_minimal_workspace {
 	init_workspace sample-minimal-workspace
 
+	#
+	# Able client extensions
+	#
+
 	rm -fr sample-minimal-workspace/client-extensions/able-*
 
 	copy_template custom-element sample-minimal-workspace/client-extensions/able-custom-element "Able Custom Element"
@@ -93,6 +97,20 @@ function refresh_sample_minimal_workspace {
 	copy_template iframe sample-minimal-workspace/client-extensions/able-iframe "Able IFrame"
 	copy_template theme-css sample-minimal-workspace/client-extensions/able-theme-css "Able Theme CSS"
 	copy_template theme-favicon sample-minimal-workspace/client-extensions/able-theme-favicon "Able Theme Favicon"
+
+	#
+	# Fox remote app client extension
+	#
+
+	rm -fr sample-minimal-workspace/client-extensions/fox-remote-app
+
+	../tools/create_remote_app.sh fox-remote-app react
+
+	mv fox-remote-app sample-minimal-workspace/client-extensions
+
+	#
+	# Sample default workspace
+	#
 
 	rm -fr sample-default-workspace/client-extensions
 
