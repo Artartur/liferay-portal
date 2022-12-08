@@ -21,7 +21,17 @@ function check_blade {
 		exit 1
 	fi
 
+	#
+	# Update Blade with Blade.
+	#
+
 	#${BLADE_PATH} update -s > /dev/null
+
+	#
+	# Update Blade directly with JPM.
+	#
+
+	#jpm install -f https://repository-cdn.liferay.com/nexus/service/local/repositories/liferay-public-releases/content/com/liferay/blade/com.liferay.blade.cli/4.1.1/com.liferay.blade.cli-4.1.1.jar
 }
 
 function copy_template {
