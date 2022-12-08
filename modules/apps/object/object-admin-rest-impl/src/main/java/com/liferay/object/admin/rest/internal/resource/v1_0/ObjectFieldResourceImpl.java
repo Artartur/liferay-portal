@@ -87,7 +87,8 @@ public class ObjectFieldResourceImpl
 					objectDefinitionExternalReferenceCode,
 					contextCompany.getCompanyId());
 
-		return _search(objectDefinition, search, filter, pagination, sorts);
+		return _getObjectFieldsPage(
+			objectDefinition, search, filter, pagination, sorts);
 	}
 
 	@NestedField(parentClass = ObjectDefinition.class, value = "objectFields")
@@ -97,7 +98,7 @@ public class ObjectFieldResourceImpl
 			Pagination pagination, Sort[] sorts)
 		throws Exception {
 
-		return _search(
+		return _getObjectFieldsPage(
 			_objectDefinitionLocalService.getObjectDefinition(
 				objectDefinitionId),
 			search, filter, pagination, sorts);
@@ -229,7 +230,7 @@ public class ObjectFieldResourceImpl
 							_objectFilterLocalService))));
 	}
 
-	private Page<ObjectField> _search(
+	private Page<ObjectField> _getObjectFieldsPage(
 			com.liferay.object.model.ObjectDefinition objectDefinition,
 			String search, Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception {
