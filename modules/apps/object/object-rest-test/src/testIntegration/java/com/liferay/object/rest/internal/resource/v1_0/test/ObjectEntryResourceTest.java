@@ -90,7 +90,7 @@ public class ObjectEntryResourceTest {
 	}
 
 	@Test
-	public void testGetNestedFieldDetailsInOneToManyRelationship()
+	public void testGetNestedFieldDetailsInOneToManyRelationship1()
 		throws Exception {
 
 		_objectRelationship = ObjectRelationshipTestUtil.addObjectRelationship(
@@ -133,7 +133,7 @@ public class ObjectEntryResourceTest {
 	}
 
 	@Test
-	public void testGetNestedFieldDetailsInOneToManyRelationshipsByRelationshipName()
+	public void testGetNestedFieldDetailsInOneToManyRelationships2()
 		throws Exception {
 
 		PropsUtil.addProperties(
