@@ -340,7 +340,9 @@ public class PredicateExpressionVisitorImpl
 				_objectFieldLocalService.getObjectFields(objectDefinitionId));
 		}
 		catch (Exception exception) {
-			_logExceptionInDebugMode(exception);
+			if (_log.isDebugEnabled()) {
+				_log.debug(exception);
+			}
 
 			return new ObjectEntryEntityModel(Collections.emptyList());
 		}
@@ -356,7 +358,9 @@ public class PredicateExpressionVisitorImpl
 					GetterUtil.getString(relationshipName));
 		}
 		catch (Exception exception) {
-			_logExceptionInDebugMode(exception);
+			if (_log.isDebugEnabled()) {
+				_log.debug(exception);
+			}
 
 			return null;
 		}
@@ -491,7 +495,9 @@ public class PredicateExpressionVisitorImpl
 					_getPredicateForRelationships(operation, left, right));
 			}
 			catch (Exception exception) {
-				_logExceptionInDebugMode(exception);
+				if (_log.isDebugEnabled()) {
+					_log.debug(exception);
+				}
 
 				return Optional.empty();
 			}
@@ -567,15 +573,11 @@ public class PredicateExpressionVisitorImpl
 			return value;
 		}
 		catch (PortalException portalException) {
-			_logExceptionInDebugMode(portalException);
+			if (_log.isDebugEnabled()) {
+				_log.debug(portalException);
+			}
 
 			return right;
-		}
-	}
-
-	private void _logExceptionInDebugMode(Exception exception) {
-		if (_log.isDebugEnabled()) {
-			_log.debug(exception);
 		}
 	}
 
