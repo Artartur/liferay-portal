@@ -130,6 +130,9 @@ public class PredicateExpressionVisitorImpl
 			ComplexPropertyExpression complexPropertyExpression)
 		throws ExpressionVisitException {
 
+		_objectRelationship = _fetchObjectRelationship(
+			complexPropertyExpression.getName());
+
 		EntityModel entityModel = _getObjectDefinitionEntityModel(
 			_objectDefinitionId);
 
@@ -140,14 +143,11 @@ public class PredicateExpressionVisitorImpl
 			(ComplexEntityField)entityFieldsMap.get(
 				complexPropertyExpression.getName());
 
-		_objectRelationship = _fetchObjectRelationship(
-			complexPropertyExpression.getName());
+		Map<String, EntityField> complexEntityFieldEntityFieldsMap =
+			complexEntityField.getEntityFieldsMap();
 
 		PropertyExpression propertyExpression =
 			complexPropertyExpression.getPropertyExpression();
-
-		Map<String, EntityField> complexEntityFieldEntityFieldsMap =
-			complexEntityField.getEntityFieldsMap();
 
 		EntityField entityField = complexEntityFieldEntityFieldsMap.get(
 			propertyExpression.getName());
