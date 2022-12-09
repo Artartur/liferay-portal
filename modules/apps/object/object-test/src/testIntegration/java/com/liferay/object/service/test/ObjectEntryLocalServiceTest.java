@@ -2642,20 +2642,18 @@ public class ObjectEntryLocalServiceTest {
 		Assert.assertEquals(count, baseModelSearchResult.getLength());
 	}
 
-	private void _assertTimestamp(Date expectedDate, Timestamp objectDate) {
+	private void _assertTimestamp(Date date, Timestamp timestamp) {
 		Calendar calendar = Calendar.getInstance();
 
-		calendar.setTime(expectedDate);
+		calendar.setTime(date);
+
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
-
 		calendar.set(Calendar.MILLISECOND, 0);
 
-		Timestamp objectDateTimestamp = new Timestamp(
-			calendar.getTimeInMillis());
-
-		Assert.assertEquals(objectDateTimestamp, objectDate);
+		Assert.assertEquals(
+			new Timestamp(calendar.getTimeInMillis()), timestamp);
 	}
 
 	private void _assertValuesListWithAccountEntryRestricted(
