@@ -71,7 +71,7 @@ public class FilterPredicateFactoryImpl implements FilterPredicateFactory {
 
 	@Override
 	public Predicate create(String filterString, long objectDefinitionId) {
-		ObjectEntryEntityModel entityModel = new ObjectEntryEntityModel(
+		EntityModel entityModel = new ObjectEntryEntityModel(
 			_objectFieldLocalService.getObjectFields(objectDefinitionId));
 
 		return create(entityModel, filterString, objectDefinitionId);

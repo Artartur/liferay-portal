@@ -313,7 +313,7 @@ public class PredicateExpressionVisitorImpl
 		ObjectRelatedModelsPredicateProviderRegistry
 			objectRelatedModelsPredicateProviderRegistry) {
 
-		_objectDefinitionsEntityModelMap.put(objectDefinitionId, entityModel);
+		_entityModels.put(objectDefinitionId, entityModel);
 		_lambdaVariableExpressionFieldNames =
 			lambdaVariableExpressionFieldNames;
 		_objectDefinitionId = objectDefinitionId;
@@ -423,14 +423,12 @@ public class PredicateExpressionVisitorImpl
 	private EntityModel _getObjectDefinitionEntityModel(
 		long objectDefinitionId) {
 
-		EntityModel entityModel = _objectDefinitionsEntityModelMap.get(
-			objectDefinitionId);
+		EntityModel entityModel = _entityModels.get(objectDefinitionId);
 
 		if (entityModel == null) {
 			entityModel = _createEntityModel(objectDefinitionId);
 
-			_objectDefinitionsEntityModelMap.put(
-				objectDefinitionId, entityModel);
+			_entityModels.put(objectDefinitionId, entityModel);
 		}
 
 		return entityModel;
@@ -592,10 +590,9 @@ public class PredicateExpressionVisitorImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		PredicateExpressionVisitorImpl.class);
 
+	private final Map<Long, EntityModel> _entityModels = new HashMap<>();
 	private final Map<String, String> _lambdaVariableExpressionFieldNames;
 	private final long _objectDefinitionId;
-	private final Map<Long, EntityModel> _objectDefinitionsEntityModelMap =
-		new HashMap<>();
 	private final ObjectFieldBusinessTypeRegistry
 		_objectFieldBusinessTypeRegistry;
 	private final ObjectFieldLocalService _objectFieldLocalService;
