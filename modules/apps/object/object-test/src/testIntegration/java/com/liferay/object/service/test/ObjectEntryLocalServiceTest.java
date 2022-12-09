@@ -1649,6 +1649,27 @@ public class ObjectEntryLocalServiceTest {
 				"listTypeEntryKeyRequired", "listTypeEntryKey1"
 			).build());
 
+		Map<String, Serializable> systemValues =
+			_objectEntryLocalService.getSystemValues(objectEntry);
+
+		_assertTimestamp(
+			objectEntry.getCreateDate(),
+			(Timestamp)systemValues.get("createDate"));
+		Assert.assertEquals(
+			objectEntry.getExternalReferenceCode(),
+			systemValues.get("externalReferenceCode"));
+		_assertTimestamp(
+			objectEntry.getModifiedDate(),
+			(Timestamp)systemValues.get("modifiedDate"));
+		Assert.assertEquals(
+			objectEntry.getObjectEntryId(), systemValues.get("objectEntryId"));
+		Assert.assertEquals(
+			objectEntry.getStatus(), systemValues.get("status"));
+		Assert.assertEquals(
+			objectEntry.getUserName(), systemValues.get("userName"));
+
+		Assert.assertEquals(systemValues.toString(), 6, systemValues.size());
+
 		Map<String, Serializable> values = _objectEntryLocalService.getValues(
 			objectEntry.getObjectEntryId());
 
@@ -1672,27 +1693,6 @@ public class ObjectEntryLocalServiceTest {
 			objectEntry.getObjectEntryId(),
 			values.get(_objectDefinition.getPKObjectFieldName()));
 		Assert.assertEquals(values.toString(), 19, values.size());
-
-		Map<String, Serializable> systemValues =
-			_objectEntryLocalService.getSystemValues(objectEntry);
-
-		_assertTimestamp(
-			objectEntry.getCreateDate(),
-			(Timestamp)systemValues.get("createDate"));
-		Assert.assertEquals(
-			objectEntry.getExternalReferenceCode(),
-			systemValues.get("externalReferenceCode"));
-		_assertTimestamp(
-			objectEntry.getModifiedDate(),
-			(Timestamp)systemValues.get("modifiedDate"));
-		Assert.assertEquals(
-			objectEntry.getObjectEntryId(), systemValues.get("objectEntryId"));
-		Assert.assertEquals(
-			objectEntry.getStatus(), systemValues.get("status"));
-		Assert.assertEquals(
-			objectEntry.getUserName(), systemValues.get("userName"));
-
-		Assert.assertEquals(systemValues.toString(), 6, systemValues.size());
 
 		try {
 			_objectEntryLocalService.getValues(0);
