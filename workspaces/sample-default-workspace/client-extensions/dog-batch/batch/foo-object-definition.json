@@ -1,5 +1,6 @@
 {
-	"facets": [],
+	"facets": [
+	],
 	"items": [
 		{
 			"accountEntryRestricted": false,
@@ -24,13 +25,16 @@
 					"dateCreated": "2022-12-06T21:09:13Z",
 					"dateModified": "2022-12-06T21:09:13Z",
 					"description": "",
-					"errorMessage": {},
+					"errorMessage": {
+					},
 					"id": 43790,
-					"label": {},
+					"label": {
+					},
 					"name": "Foo Update 1",
 					"objectActionExecutorKey": "function#easy-object-action-1",
 					"objectActionTriggerKey": "onAfterUpdate",
-					"parameters": {},
+					"parameters": {
+					},
 					"status": {
 						"code": 0,
 						"label": "never-ran",
@@ -43,13 +47,16 @@
 					"dateCreated": "2022-12-06T21:09:27Z",
 					"dateModified": "2022-12-06T21:09:27Z",
 					"description": "",
-					"errorMessage": {},
+					"errorMessage": {
+					},
 					"id": 43792,
-					"label": {},
+					"label": {
+					},
 					"name": "Foo Update 2",
 					"objectActionExecutorKey": "function#easy-object-action-2",
 					"objectActionTriggerKey": "onAfterUpdate",
-					"parameters": {},
+					"parameters": {
+					},
 					"status": {
 						"code": 0,
 						"label": "never-ran",
@@ -73,7 +80,8 @@
 					"listTypeDefinitionExternalReferenceCode": "",
 					"listTypeDefinitionId": 0,
 					"name": "createDate",
-					"objectFieldSettings": [],
+					"objectFieldSettings": [
+					],
 					"required": false,
 					"state": false,
 					"system": true,
@@ -94,7 +102,8 @@
 					"listTypeDefinitionExternalReferenceCode": "",
 					"listTypeDefinitionId": 0,
 					"name": "creator",
-					"objectFieldSettings": [],
+					"objectFieldSettings": [
+					],
 					"required": false,
 					"state": false,
 					"system": true,
@@ -115,7 +124,8 @@
 					"listTypeDefinitionExternalReferenceCode": "",
 					"listTypeDefinitionId": 0,
 					"name": "externalReferenceCode",
-					"objectFieldSettings": [],
+					"objectFieldSettings": [
+					],
 					"required": false,
 					"state": false,
 					"system": true,
@@ -162,7 +172,8 @@
 					"listTypeDefinitionExternalReferenceCode": "",
 					"listTypeDefinitionId": 0,
 					"name": "id",
-					"objectFieldSettings": [],
+					"objectFieldSettings": [
+					],
 					"required": false,
 					"state": false,
 					"system": true,
@@ -183,7 +194,8 @@
 					"listTypeDefinitionExternalReferenceCode": "",
 					"listTypeDefinitionId": 0,
 					"name": "modifiedDate",
-					"objectFieldSettings": [],
+					"objectFieldSettings": [
+					],
 					"required": false,
 					"state": false,
 					"system": true,
@@ -204,16 +216,20 @@
 					"listTypeDefinitionExternalReferenceCode": "",
 					"listTypeDefinitionId": 0,
 					"name": "status",
-					"objectFieldSettings": [],
+					"objectFieldSettings": [
+					],
 					"required": false,
 					"state": false,
 					"system": true,
 					"type": "String"
 				}
 			],
-			"objectLayouts": [],
-			"objectRelationships": [],
-			"objectViews": [],
+			"objectLayouts": [
+			],
+			"objectRelationships": [
+			],
+			"objectViews": [
+			],
 			"panelCategoryKey": "",
 			"parameterRequired": false,
 			"pluralLabel": {
