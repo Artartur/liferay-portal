@@ -186,7 +186,7 @@ public class PredicateExpressionVisitorImpl
 			return column.in(
 				TransformUtil.transformToArray(
 					rights,
-					right -> _getValue(_objectDefinitionId, left, right),
+					right -> _getValue(left, _objectDefinitionId, right),
 					Object.class));
 		}
 
@@ -328,7 +328,7 @@ public class PredicateExpressionVisitorImpl
 
 		return column.like(
 			StringPool.PERCENT +
-				_getValue(_objectDefinitionId, fieldName, fieldValue) +
+				_getValue(fieldName, _objectDefinitionId, fieldValue) +
 					StringPool.PERCENT);
 	}
 
@@ -454,7 +454,7 @@ public class PredicateExpressionVisitorImpl
 			_objectRelationship,
 			_getExpressionPredicate(
 				_getColumn(_relatedFieldName, relatedObjectDefinitionId),
-				operation, _getValue(relatedObjectDefinitionId, left, right)));
+				operation, _getValue(left, relatedObjectDefinitionId, right)));
 	}
 
 	private Optional<Predicate> _getPredicateOptional(
@@ -500,7 +500,7 @@ public class PredicateExpressionVisitorImpl
 		return Optional.ofNullable(
 			_getExpressionPredicate(
 				_getColumn(left, _objectDefinitionId), operation,
-				_getValue(_objectDefinitionId, left, right)));
+				_getValue(left, _objectDefinitionId, right)));
 	}
 
 	private long _getRelatedObjectDefinitionId(
@@ -514,7 +514,7 @@ public class PredicateExpressionVisitorImpl
 	}
 
 	private Object _getValue(
-		long objectDefinitionId, Object left, Object right) {
+		Object left, long objectDefinitionId, Object right) {
 
 		EntityField entityField = _getEntityField(left, objectDefinitionId);
 
@@ -583,7 +583,7 @@ public class PredicateExpressionVisitorImpl
 		Column<?, Object> column = _getColumn(fieldName, _objectDefinitionId);
 
 		return column.like(
-			_getValue(_objectDefinitionId, fieldName, fieldValue) +
+			_getValue(fieldName, _objectDefinitionId, fieldValue) +
 				StringPool.PERCENT);
 	}
 
