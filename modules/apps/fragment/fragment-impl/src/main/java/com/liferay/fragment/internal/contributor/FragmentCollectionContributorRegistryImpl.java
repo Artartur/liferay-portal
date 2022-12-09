@@ -150,7 +150,7 @@ public class FragmentCollectionContributorRegistryImpl
 		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
 			bundleContext, FragmentCollectionContributor.class,
 			"fragment.collection.key",
-			new FragmentCollectionContributorRegistryServiceTrackerCustomizer(
+			new FragmentCollectionContributorEagerServiceTrackerCustomizer(
 				bundleContext));
 	}
 
@@ -221,7 +221,7 @@ public class FragmentCollectionContributorRegistryImpl
 	private ServiceTrackerMap<String, FragmentCollectionContributor>
 		_serviceTrackerMap;
 
-	private class FragmentCollectionContributorRegistryServiceTrackerCustomizer
+	private class FragmentCollectionContributorEagerServiceTrackerCustomizer
 		implements EagerServiceTrackerCustomizer
 			<FragmentCollectionContributor, FragmentCollectionContributor> {
 
@@ -306,7 +306,7 @@ public class FragmentCollectionContributorRegistryImpl
 			_bundleContext.ungetService(serviceReference);
 		}
 
-		private FragmentCollectionContributorRegistryServiceTrackerCustomizer(
+		private FragmentCollectionContributorEagerServiceTrackerCustomizer(
 			BundleContext bundleContext) {
 
 			_bundleContext = bundleContext;
