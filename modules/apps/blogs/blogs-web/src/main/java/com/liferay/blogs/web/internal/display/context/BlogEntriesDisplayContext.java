@@ -325,11 +325,11 @@ public class BlogEntriesDisplayContext {
 
 			searchContainer.setResultsAndTotal(
 				() -> {
+					List<BlogsEntry> blogsEntries = new ArrayList<>();
+
 					List<SearchResult> searchResults =
 						SearchResultUtil.getSearchResults(
 							hits, LocaleUtil.getDefault());
-
-					List<BlogsEntry> blogsEntries = new ArrayList<>();
 
 					for (SearchResult searchResult : searchResults) {
 						BlogsEntry blogsEntry = _toBlogsEntry(searchResult);

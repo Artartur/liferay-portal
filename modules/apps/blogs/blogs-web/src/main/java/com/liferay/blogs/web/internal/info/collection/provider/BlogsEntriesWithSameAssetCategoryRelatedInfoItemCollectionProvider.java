@@ -76,6 +76,8 @@ public class BlogsEntriesWithSameAssetCategoryRelatedInfoItemCollectionProvider
 		AssetEntryQuery assetEntryQuery = _getAssetEntryQuery(collectionQuery);
 
 		try {
+			List<BlogsEntry> blogsEntries = new ArrayList<>();
+
 			AssetCategory assetCategory = (AssetCategory)relatedItem;
 
 			SearchContext searchContext = _getSearchContext(assetCategory);
@@ -84,14 +86,9 @@ public class BlogsEntriesWithSameAssetCategoryRelatedInfoItemCollectionProvider
 				searchContext, assetEntryQuery, assetEntryQuery.getStart(),
 				assetEntryQuery.getEnd());
 
-			Long count = _assetHelper.searchCount(
-				searchContext, assetEntryQuery);
-
 			List<SearchResult> searchResults =
 				SearchResultUtil.getSearchResults(
 					hits, LocaleUtil.getDefault());
-
-			List<BlogsEntry> blogsEntries = new ArrayList<>();
 
 			for (SearchResult searchResult : searchResults) {
 				BlogsEntry blogsEntry = _toBlogsEntry(searchResult);
@@ -102,6 +99,9 @@ public class BlogsEntriesWithSameAssetCategoryRelatedInfoItemCollectionProvider
 
 				blogsEntries.add(blogsEntry);
 			}
+
+			Long count = _assetHelper.searchCount(
+				searchContext, assetEntryQuery);
 
 			return InfoPage.of(
 				blogsEntries, collectionQuery.getPagination(),
