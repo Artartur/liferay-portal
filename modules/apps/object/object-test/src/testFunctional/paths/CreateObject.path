@@ -187,7 +187,7 @@
 	</tr>
 	<tr>
 		<td>SAVE_BUTTON_DISABLED</td>
-		<td>//button[contains(@id,'save') and @disabled]</td>
+		<td>//button[contains(text(),'Save') and @disabled]</td>
 		<td></td>
 	</tr>
 	<tr>
