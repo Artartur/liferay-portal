@@ -36,11 +36,8 @@ public class KBGroupServiceConfigurationUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		String filterString = String.format(
-			"(%s=%s*)", Constants.SERVICE_PID, _SERVICE_PID);
-
 		Configuration[] configurations = _configurationAdmin.listConfigurations(
-			filterString);
+			String.format("(%s=%s*)", Constants.SERVICE_PID, _SERVICE_PID));
 
 		if (ArrayUtil.isEmpty(configurations)) {
 			return;
