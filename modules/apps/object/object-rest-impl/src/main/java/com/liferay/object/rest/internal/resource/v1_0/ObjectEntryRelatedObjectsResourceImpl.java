@@ -65,7 +65,6 @@ public class ObjectEntryRelatedObjectsResourceImpl
 				_objectDefinition.getStorageType());
 
 		_checkCurrentObjectEntry(objectEntryManager, currentObjectEntryId);
-
 		_checkRelatedObjectEntry(
 			objectEntryManager, objectRelationshipName, relatedObjectEntryId);
 
