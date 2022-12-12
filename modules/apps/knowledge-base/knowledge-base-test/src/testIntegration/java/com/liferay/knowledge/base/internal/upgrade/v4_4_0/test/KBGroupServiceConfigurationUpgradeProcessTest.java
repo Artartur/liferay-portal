@@ -108,7 +108,13 @@ public class KBGroupServiceConfigurationUpgradeProcessTest {
 	@Test
 	public void testUpgrade() throws Exception {
 		for (Configuration configuration : _getConfigurations()) {
-			_assertPropertiesBefore(configuration.getProperties());
+			Dictionary<String, Object> properties =
+				configuration.getProperties();
+
+			Assert.assertTrue(
+				properties.get("rssDelta") instanceof Integer);
+			Assert.assertNotNull(
+				properties.get("rssFormat"));
 		}
 
 		try (LogCapture logCapture = LoggerTestUtil.configureLog4JLogger(
@@ -120,35 +126,19 @@ public class KBGroupServiceConfigurationUpgradeProcessTest {
 		}
 
 		for (Configuration configuration : _getConfigurations()) {
-			_assertPropertiesAfter(configuration.getProperties());
+			Dictionary<String, Object> properties =
+				configuration.getProperties();
+
+			Assert.assertTrue(
+				properties.get("rssDelta") instanceof String);
+			Assert.assertNull(
+				properties.get("rssFormat"));
 		}
 	}
 
-	private void _assertPropertiesAfter(Dictionary<String, Object> properties) {
-		Assert.assertTrue(
-			"The property 'rssDelta' should be of type String",
-			properties.get("rssDelta") instanceof String);
-		Assert.assertNull(
-			"The property 'rssFormat' should not exist",
-			properties.get("rssFormat"));
-	}
-
-	private void _assertPropertiesBefore(
-		Dictionary<String, Object> properties) {
-
-		Assert.assertTrue(
-			"The property 'rssDelta' should be of type Integer",
-			properties.get("rssDelta") instanceof Integer);
-		Assert.assertNotNull(
-			"The property 'rssFormat' should exist",
-			properties.get("rssFormat"));
-	}
-
 	private Configuration[] _getConfigurations() throws Exception {
-		String filterString = String.format(
-			"(%s=%s*)", Constants.SERVICE_PID, _SERVICE_PID);
-
-		return _configurationAdmin.listConfigurations(filterString);
+		return _configurationAdmin.listConfigurations(
+			String.format("(%s=%s*)", Constants.SERVICE_PID, _SERVICE_PID));
 	}
 
 	private UpgradeProcess _getUpgradeProcess() {
