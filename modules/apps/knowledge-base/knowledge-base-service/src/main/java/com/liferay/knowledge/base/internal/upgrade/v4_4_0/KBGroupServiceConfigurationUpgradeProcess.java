@@ -36,10 +36,6 @@ public class KBGroupServiceConfigurationUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		_upgradeRSSConfiguration();
-	}
-
-	private void _upgradeRSSConfiguration() throws Exception {
 		String filterString = String.format(
 			"(%s=%s*)", Constants.SERVICE_PID, _SERVICE_PID);
 
