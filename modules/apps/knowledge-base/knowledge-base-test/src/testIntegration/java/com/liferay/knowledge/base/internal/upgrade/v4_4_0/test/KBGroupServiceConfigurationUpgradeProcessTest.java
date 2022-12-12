@@ -111,10 +111,8 @@ public class KBGroupServiceConfigurationUpgradeProcessTest {
 			Dictionary<String, Object> properties =
 				configuration.getProperties();
 
-			Assert.assertTrue(
-				properties.get("rssDelta") instanceof Integer);
-			Assert.assertNotNull(
-				properties.get("rssFormat"));
+			Assert.assertTrue(properties.get("rssDelta") instanceof Integer);
+			Assert.assertNotNull(properties.get("rssFormat"));
 		}
 
 		try (LogCapture logCapture = LoggerTestUtil.configureLog4JLogger(
@@ -129,10 +127,8 @@ public class KBGroupServiceConfigurationUpgradeProcessTest {
 			Dictionary<String, Object> properties =
 				configuration.getProperties();
 
-			Assert.assertTrue(
-				properties.get("rssDelta") instanceof String);
-			Assert.assertNull(
-				properties.get("rssFormat"));
+			Assert.assertTrue(properties.get("rssDelta") instanceof String);
+			Assert.assertNull(properties.get("rssFormat"));
 		}
 	}
 
