@@ -396,7 +396,7 @@ definition {
 			}
 
 			if (isSet(owner)) {
-				Click(
+				Click.clickAtNotVisible(
 					key_permissionName = "${permissionsName}",
 					key_roleName = "owner",
 					locator1 = "ObjectCustomViews#SELECT_ANY_PERMISSIONS");
