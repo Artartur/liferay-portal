@@ -1073,7 +1073,7 @@ public class ObjectDefinitionLocalServiceTest {
 					objectDefinitionEnableObjectEntryHistoryException) {
 
 			Assert.assertEquals(
-				"Enable object entry history is allowed only for object " +
+				"Enable object entry history is only allowed for object " +
 					"definitions with the default storage type",
 				objectDefinitionEnableObjectEntryHistoryException.getMessage());
 		}

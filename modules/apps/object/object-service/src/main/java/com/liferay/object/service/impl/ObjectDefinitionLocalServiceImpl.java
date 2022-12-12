@@ -1386,7 +1386,7 @@ public class ObjectDefinitionLocalServiceImpl
 				storageType, ObjectDefinitionConstants.STORAGE_TYPE_DEFAULT)) {
 
 			throw new ObjectDefinitionEnableCategorizationException(
-				"Enable categorization is allowed only for object " +
+				"Enable categorization is only allowed for object " +
 					"definitions with the default storage type");
 		}
 	}
@@ -1405,7 +1405,7 @@ public class ObjectDefinitionLocalServiceImpl
 				storageType, ObjectDefinitionConstants.STORAGE_TYPE_DEFAULT)) {
 
 			throw new ObjectDefinitionEnableCategorizationException(
-				"Enable comments is allowed only for object definitions with " +
+				"Enable comments is only allowed for object definitions with " +
 					"the default storage type");
 		}
 	}
@@ -1429,7 +1429,7 @@ public class ObjectDefinitionLocalServiceImpl
 				storageType, ObjectDefinitionConstants.STORAGE_TYPE_DEFAULT)) {
 
 			throw new ObjectDefinitionEnableObjectEntryHistoryException(
-				"Enable object entry history is allowed only for object " +
+				"Enable object entry history is only allowed for object " +
 					"definitions with the default storage type");
 		}
 
