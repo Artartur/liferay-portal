@@ -100,6 +100,7 @@ public abstract class BaseKBPortlet extends MVCPortlet {
 
 		long resourcePrimKey = ParamUtil.getLong(
 			resourceRequest, "resourcePrimKey");
+
 		int max = ParamUtil.getInteger(
 			resourceRequest, "max", SearchContainer.DEFAULT_DELTA);
 		String type = ParamUtil.getString(
