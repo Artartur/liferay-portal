@@ -106,14 +106,18 @@ public class KBGroupServiceConfigurationUpgradeProcessTest {
 	}
 
 	@Test
-	public void testKBGroupServiceConfigurationUpgradeProcessWithExistingConfiguration()
-		throws Exception {
-
+	public void testUpgrade() throws Exception {
 		for (Configuration configuration : _getConfigurations()) {
 			_assertPropertiesBefore(configuration.getProperties());
 		}
 
-		_runUpgrade();
+		try (LogCapture logCapture = LoggerTestUtil.configureLog4JLogger(
+				_CLASS_NAME, LoggerTestUtil.OFF)) {
+
+			UpgradeProcess upgradeProcess = _getUpgradeProcess();
+
+			upgradeProcess.upgrade();
+		}
 
 		for (Configuration configuration : _getConfigurations()) {
 			_assertPropertiesAfter(configuration.getProperties());
@@ -164,16 +168,6 @@ public class KBGroupServiceConfigurationUpgradeProcessTest {
 			});
 
 		return upgradeProcesses[0];
-	}
-
-	private void _runUpgrade() throws Exception {
-		try (LogCapture logCapture = LoggerTestUtil.configureLog4JLogger(
-				_CLASS_NAME, LoggerTestUtil.OFF)) {
-
-			UpgradeProcess upgradeProcess = _getUpgradeProcess();
-
-			upgradeProcess.upgrade();
-		}
 	}
 
 	private static final String _CLASS_NAME =
