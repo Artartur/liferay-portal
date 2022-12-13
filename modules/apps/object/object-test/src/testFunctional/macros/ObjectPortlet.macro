@@ -457,6 +457,8 @@ definition {
 
 		SelectFrameTop();
 
+		WaitForVisible(locator1 = "CommerceEntry#PAGINATION_RESULTS");
+
 		if (IsElementPresent(locator1 = "ObjectPortlet#ENTRY_KEBAB_MENU")) {
 			Click(locator1 = "ObjectPortlet#ENTRY_KEBAB_MENU");
 
