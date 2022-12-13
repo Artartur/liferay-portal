@@ -223,7 +223,6 @@ definition {
 		property osgi.module.configuration.file.names = "com.liferay.object.rest.internal.configuration.FFObjectEntryPermissionsActionConfiguration.config";
 		property osgi.module.configurations = "enabled=\"true\"";
 		property portal.acceptance = "true";
-		property portal.upstream = "quarantine";
 		property test.name.skip.portal.instance = "ObjectPermission#CanDeleteSingleObjectEntryWithDeletePermission";
 
 		ObjectAdmin.addObjectViaAPI(
@@ -600,7 +599,6 @@ definition {
 	test CannotDeleteOwnSingleObjectEntryWithoutDeleteOwnerPermission {
 		property osgi.module.configuration.file.names = "com.liferay.object.rest.internal.configuration.FFObjectEntryPermissionsActionConfiguration.config";
 		property osgi.module.configurations = "enabled=\"true\"";
-		property portal.upstream = "quarantine";
 		property test.name.skip.portal.instance = "ObjectPermission#CannotDeleteOwnSingleObjectEntryWithoutDeleteOwnerPermission";
 
 		ObjectAdmin.addObjectViaAPI(
@@ -862,7 +860,6 @@ definition {
 	test CannotUpdateOwnSingleObjectEntryWithoutPermissionsOwnerPermission {
 		property osgi.module.configuration.file.names = "com.liferay.object.rest.internal.configuration.FFObjectEntryPermissionsActionConfiguration.config";
 		property osgi.module.configurations = "enabled=\"true\"";
-		property portal.upstream = "quarantine";
 		property test.name.skip.portal.instance = "ObjectPermission#CannotUpdateOwnSingleObjectEntryWithoutPermissionsOwnerPermission";
 
 		ObjectAdmin.addObjectViaAPI(
@@ -1021,8 +1018,6 @@ definition {
 	@description = "LPS-135390 - Verify it is not possible to update a Picklist without the Update permission"
 	@priority = "4"
 	test CannotUpdatePicklistWithoutUpdatePermission {
-		property portal.acceptance = "quarantine";
-
 		Picklist.addPicklistViaAPI(picklistName = "Picklist Test");
 
 		Picklist.addPicklistItemViaAPI(
@@ -1228,7 +1223,6 @@ definition {
 	@description = "LPS-146759 - Verify it is not possible to update a single Picklist created by the user if the Update Owner permission is removed"
 	@priority = "4"
 	test CannotUpdateSinglePicklistWithoutUpdateOwnerPermission {
-		property portal.acceptance = "quarantine";
 		property test.name.skip.portal.instance = "ObjectPermission#CannotUpdateSinglePicklistWithoutUpdateOwnerPermission";
 
 		JSONRole.addRegularRole(
@@ -1295,7 +1289,6 @@ definition {
 	@description = "LPS-146757 - Verify it is not possible to view a single Object Entry create by the user if the View Owner permission is removed"
 	@priority = "4"
 	test CannotViewOwnSingleObjectEntryWithoutViewOwnerPermission {
-		property portal.upstream = "quarantine";
 		property test.name.skip.portal.instance = "ObjectPermission#CannotViewOwnSingleObjectEntryWithoutViewOwnerPermission";
 
 		ObjectAdmin.addObjectViaAPI(
@@ -1595,7 +1588,6 @@ definition {
 		property osgi.module.configuration.file.names = "com.liferay.object.rest.internal.configuration.FFObjectEntryPermissionsActionConfiguration.config";
 		property osgi.module.configurations = "enabled=\"true\"";
 		property portal.acceptance = "true";
-		property portal.upstream = "quarantine";
 		property test.name.skip.portal.instance = "ObjectPermission#CanUpdateSingleObjectEntryPermissionsPermission";
 
 		ObjectAdmin.addObjectViaAPI(
@@ -1683,7 +1675,6 @@ definition {
 		property osgi.module.configuration.file.names = "com.liferay.object.rest.internal.configuration.FFObjectEntryPermissionsActionConfiguration.config";
 		property osgi.module.configurations = "enabled=\"true\"";
 		property portal.acceptance = "true";
-		property portal.upstream = "quarantine";
 		property test.name.skip.portal.instance = "ObjectPermission#CanUpdateSingleObjectEntryWithUpdatePermission";
 
 		ObjectAdmin.addObjectViaAPI(
@@ -2116,8 +2107,6 @@ definition {
 	test CanViewSingleObjectEntryWithViewPermission {
 		property osgi.module.configuration.file.names = "com.liferay.object.rest.internal.configuration.FFObjectEntryPermissionsActionConfiguration.config";
 		property osgi.module.configurations = "enabled=\"true\"";
-		property portal.acceptance = "true";
-		property portal.upstream = "quarantine";
 		property test.name.skip.portal.instance = "ObjectPermission#CanViewSingleObjectEntryWithViewPermission";
 
 		ObjectAdmin.addObjectViaAPI(
