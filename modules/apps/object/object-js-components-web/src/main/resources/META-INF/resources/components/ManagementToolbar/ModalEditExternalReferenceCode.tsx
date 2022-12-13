@@ -48,12 +48,30 @@ export function ModalEditExternalReferenceCode({
 	saveURL,
 	setExternalReferenceCode,
 }: ModalEditExternalReferenceCodeProps) {
-	const [error, setError] = useState<string>('');
+	const [backendError, setBackendError] = useState<string>('');
+	const [errors, setErrors] = useState<FormError<TInitialValues>>({});
 	const initialValues: TInitialValues = {
 		externalReferenceCode,
 	};
 
+	const validate = ({externalReferenceCode}: TInitialValues) => {
+		const errors: FormError<TInitialValues> = {};
+
+		if (externalReferenceCode === '') {
+			errors.externalReferenceCode = Liferay.Language.get('required');
+		}
+
+		return errors;
+	};
+
 	const onSubmit = async ({externalReferenceCode}: TInitialValues) => {
+		const currentErrors = validate({externalReferenceCode});
+
+		if (Object.keys(currentErrors).length) {
+			return setErrors(currentErrors);
+		}
+		setErrors({});
+
 		try {
 			const entity = await onGetEntity();
 
@@ -71,21 +89,11 @@ export function ModalEditExternalReferenceCode({
 			});
 		}
 		catch (error) {
-			setError((error as Error).message);
+			setBackendError((error as Error).message);
 		}
 	};
 
-	const validate = ({externalReferenceCode}: TInitialValues) => {
-		const errors: FormError<TInitialValues> = {};
-
-		if (externalReferenceCode === '') {
-			errors.externalReferenceCode = Liferay.Language.get('required');
-		}
-
-		return errors;
-	};
-
-	const {errors, handleChange, handleSubmit, values} = useForm({
+	const {handleChange, values} = useForm({
 		initialValues,
 		onSubmit,
 		validate,
@@ -93,7 +101,7 @@ export function ModalEditExternalReferenceCode({
 
 	return (
 		<ClayModal center observer={observer}>
-			<ClayForm onSubmit={handleSubmit}>
+			<ClayForm>
 				<ClayModal.Header>
 					{Liferay.Util.sub(
 						Liferay.Language.get('edit-x'),
@@ -102,8 +110,10 @@ export function ModalEditExternalReferenceCode({
 				</ClayModal.Header>
 
 				<ClayModal.Body>
-					{error && (
-						<ClayAlert displayType="danger">{error}</ClayAlert>
+					{backendError && (
+						<ClayAlert displayType="danger">
+							{backendError}
+						</ClayAlert>
 					)}
 
 					<Input
@@ -128,7 +138,10 @@ export function ModalEditExternalReferenceCode({
 								{Liferay.Language.get('cancel')}
 							</ClayButton>
 
-							<ClayButton displayType="primary" type="submit">
+							<ClayButton
+								displayType="primary"
+								onClick={() => onSubmit(values)}
+							>
 								{Liferay.Language.get('save')}
 							</ClayButton>
 						</ClayButton.Group>
