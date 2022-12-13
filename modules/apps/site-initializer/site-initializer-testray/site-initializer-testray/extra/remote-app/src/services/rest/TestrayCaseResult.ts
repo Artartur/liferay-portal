@@ -122,6 +122,7 @@ class TestrayCaseResultRest extends Rest<CaseResultForm, TestrayCaseResult> {
 
 	public removeAssign(caseResult: TestrayCaseResult) {
 		return this.update(caseResult.id, {
+			dueStatus: CaseResultStatuses.UNTESTED,
 			startDate: null,
 			userId: this.UNASSIGNED_USER_ID,
 		});
