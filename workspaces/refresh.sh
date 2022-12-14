@@ -74,7 +74,14 @@ function refresh_sample_default_workspace {
 	#echo -e "\nliferay.workspace.docker.image.liferay=liferay/dxp:7.4.13-u53-d5.0.3-20221201085420" >> gradle.properties
 	echo -e "\nliferay.workspace.node.package.manager=yarn" >> gradle.properties
 
-	sort -o gradle.properties gradle.properties
+	#
+	# https://stackoverflow.com/questions/1654021/how-can-i-delete-a-newline-if-it-is-the-last-character-in-a-file
+	# https://stackoverflow.com/questions/38256431/bash-sort-ignore-first-5-lines
+	#
+
+	{ head -n 5 gradle.properties ; tail -n +6 gradle.properties | sort | perl -e 'chomp if eof' -p; } >gradle.properties.tmp
+
+	mv gradle.properties.tmp gradle.properties
 
 	touch modules/.touch
 	touch themes/.touch
