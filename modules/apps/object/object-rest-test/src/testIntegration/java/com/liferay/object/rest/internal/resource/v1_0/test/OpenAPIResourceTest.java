@@ -94,7 +94,6 @@ public class OpenAPIResourceTest {
 			Http.Method.GET);
 
 		Assert.assertNotNull(jsonObject.getString("openapi"));
-
 		Assert.assertNull(
 			jsonObject.getJSONArray(_objectDefinition2.getRESTContextPath()));
 
