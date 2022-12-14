@@ -79,7 +79,7 @@ function refresh_sample_default_workspace {
 	# https://stackoverflow.com/questions/38256431/bash-sort-ignore-first-5-lines
 	#
 
-	{ head -n 5 gradle.properties ; tail -n +6 gradle.properties | sort | perl -e 'chomp if eof' -p; } >gradle.properties.tmp
+	{ head -n 5 gradle.properties ; tail -n +6 gradle.properties | sort | perl -e "chomp if eof" -p; } >gradle.properties.tmp
 
 	mv gradle.properties.tmp gradle.properties
 
