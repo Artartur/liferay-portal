@@ -62,16 +62,16 @@ public class FeatureFlagImplTest {
 		String value = RandomTestUtil.randomString();
 
 		withFeatureFlag(
-			key,
 			featureFlag -> Assert.assertEquals(
-				GetterUtil.DEFAULT_STRING, featureFlag.getDescription(null)));
+				GetterUtil.DEFAULT_STRING, featureFlag.getDescription(null)),
+			key);
 
 		PropsUtil.set(FeatureFlagConstants.getKey(key, "description"), value);
 
 		withFeatureFlag(
-			key,
 			featureFlag -> Assert.assertEquals(
-				value, featureFlag.getDescription(null)));
+				value, featureFlag.getDescription(null)),
+			key);
 	}
 
 	@Test
@@ -85,22 +85,22 @@ public class FeatureFlagImplTest {
 		_setStatus(releaseKey, FeatureFlagStatus.RELEASE);
 
 		withFeatureFlag(
-			betaKey,
 			featureFlag -> Assert.assertEquals(
-				FeatureFlagStatus.BETA, featureFlag.getFeatureFlagStatus()));
+				FeatureFlagStatus.BETA, featureFlag.getFeatureFlagStatus()),
+			betaKey);
 		withFeatureFlag(
-			devKey,
 			featureFlag -> Assert.assertEquals(
-				FeatureFlagStatus.DEV, featureFlag.getFeatureFlagStatus()));
+				FeatureFlagStatus.DEV, featureFlag.getFeatureFlagStatus()),
+			devKey);
 		withFeatureFlag(
-			releaseKey,
 			featureFlag -> Assert.assertEquals(
-				FeatureFlagStatus.RELEASE, featureFlag.getFeatureFlagStatus()));
+				FeatureFlagStatus.RELEASE, featureFlag.getFeatureFlagStatus()),
+			releaseKey);
 
 		withFeatureFlag(
-			"ABC-123",
 			featureFlag -> Assert.assertEquals(
-				FeatureFlagStatus.DEV, featureFlag.getFeatureFlagStatus()));
+				FeatureFlagStatus.DEV, featureFlag.getFeatureFlagStatus()),
+			"ABC-123");
 	}
 
 	@Test
@@ -109,16 +109,15 @@ public class FeatureFlagImplTest {
 		String value = RandomTestUtil.randomString();
 
 		withFeatureFlag(
-			key,
-			featureFlag -> Assert.assertEquals(
-				key, featureFlag.getTitle(null)));
+			featureFlag -> Assert.assertEquals(key, featureFlag.getTitle(null)),
+			key);
 
 		PropsUtil.set(FeatureFlagConstants.getKey(key, "title"), value);
 
 		withFeatureFlag(
-			key,
 			featureFlag -> Assert.assertEquals(
-				value, featureFlag.getTitle(null)));
+				value, featureFlag.getTitle(null)),
+			key);
 	}
 
 	@NewEnv.JVMArgsLine("-Dcompany-id-properties=true")
@@ -154,48 +153,55 @@ public class FeatureFlagImplTest {
 			Boolean.TRUE.toString());
 
 		withFeatureFlag(
-			CompanyConstants.SYSTEM, systemKey1,
-			featureFlag -> Assert.assertTrue(featureFlag.isEnabled()));
+			CompanyConstants.SYSTEM,
+			featureFlag -> Assert.assertTrue(featureFlag.isEnabled()),
+			systemKey1);
 		withFeatureFlag(
-			CompanyConstants.SYSTEM, systemKey2,
-			featureFlag -> Assert.assertFalse(featureFlag.isEnabled()));
+			CompanyConstants.SYSTEM,
+			featureFlag -> Assert.assertFalse(featureFlag.isEnabled()),
+			systemKey2);
 		withFeatureFlag(
-			CompanyConstants.SYSTEM, company1key1,
-			featureFlag -> Assert.assertFalse(featureFlag.isEnabled()));
+			CompanyConstants.SYSTEM,
+			featureFlag -> Assert.assertFalse(featureFlag.isEnabled()),
+			company1key1);
 
 		withFeatureFlag(
-			company1.getCompanyId(), systemKey1,
-			featureFlag -> Assert.assertFalse(featureFlag.isEnabled()));
+			company1.getCompanyId(),
+			featureFlag -> Assert.assertFalse(featureFlag.isEnabled()),
+			systemKey1);
 		withFeatureFlag(
-			company1.getCompanyId(), company1key1,
-			featureFlag -> Assert.assertTrue(featureFlag.isEnabled()));
+			company1.getCompanyId(),
+			featureFlag -> Assert.assertTrue(featureFlag.isEnabled()),
+			company1key1);
 		withFeatureFlag(
-			company1.getCompanyId(), company1key2,
-			featureFlag -> Assert.assertFalse(featureFlag.isEnabled()));
+			company1.getCompanyId(),
+			featureFlag -> Assert.assertFalse(featureFlag.isEnabled()),
+			company1key2);
 
 		withFeatureFlag(
-			company2.getCompanyId(), systemKey1,
-			featureFlag -> Assert.assertFalse(featureFlag.isEnabled()));
+			company2.getCompanyId(),
+			featureFlag -> Assert.assertFalse(featureFlag.isEnabled()),
+			systemKey1);
 		withFeatureFlag(
-			company2.getCompanyId(), company2key1,
-			featureFlag -> Assert.assertTrue(featureFlag.isEnabled()));
+			company2.getCompanyId(),
+			featureFlag -> Assert.assertTrue(featureFlag.isEnabled()),
+			company2key1);
 	}
 
 	protected void withFeatureFlag(
-		long companyId, String featureFlagKey,
-		Consumer<FeatureFlag> featureFlagConsumer) {
+		Consumer<FeatureFlag> consumer, String featureFlagKey) {
+
+		consumer.accept(new FeatureFlagImpl(featureFlagKey));
+	}
+
+	protected void withFeatureFlag(
+		long companyId, Consumer<FeatureFlag> consumer, String featureFlagKey) {
 
 		try (SafeCloseable safeCloseable =
 				_companyIdThreadLocal.setWithSafeCloseable(companyId)) {
 
-			withFeatureFlag(featureFlagKey, featureFlagConsumer);
+			withFeatureFlag(consumer, featureFlagKey);
 		}
-	}
-
-	protected void withFeatureFlag(
-		String featureFlagKey, Consumer<FeatureFlag> featureFlagConsumer) {
-
-		featureFlagConsumer.accept(new FeatureFlagImpl(featureFlagKey));
 	}
 
 	private void _setStatus(

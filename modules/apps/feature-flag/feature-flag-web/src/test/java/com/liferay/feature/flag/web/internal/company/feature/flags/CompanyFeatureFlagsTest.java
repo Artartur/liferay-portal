@@ -82,10 +82,10 @@ public class CompanyFeatureFlagsTest {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			_companyFeatureFlags.getJSON());
 
-		Set<String> keySet = jsonObject.keySet();
+		Set<String> set = jsonObject.keySet();
 
 		Assert.assertEquals(
-			keySet.toString(), _expectedFeatureFlags.length, keySet.size());
+			set.toString(), _expectedFeatureFlags.length, set.size());
 
 		for (FeatureFlag featureFlag : _expectedFeatureFlags) {
 			Assert.assertEquals(
