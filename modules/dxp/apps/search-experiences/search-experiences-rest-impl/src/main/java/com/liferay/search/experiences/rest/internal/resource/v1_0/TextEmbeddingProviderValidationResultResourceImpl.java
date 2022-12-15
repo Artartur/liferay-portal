@@ -100,14 +100,14 @@ public class TextEmbeddingProviderValidationResultResourceImpl
 		Map<?, ?> properties) {
 
 		try {
-			Double[] embedding = _textEmbeddingRetriever.getTextEmbedding(
+			Double[] textEmbedding = _textEmbeddingRetriever.getTextEmbedding(
 				ConfigurableUtil.createConfigurable(
 					SemanticSearchConfiguration.class, properties),
 				"hello liferay");
 
 			return new TextEmbeddingProviderValidationResult() {
 				{
-					expectedDimensions = embedding.length;
+					expectedDimensions = textEmbedding.length;
 				}
 			};
 		}
