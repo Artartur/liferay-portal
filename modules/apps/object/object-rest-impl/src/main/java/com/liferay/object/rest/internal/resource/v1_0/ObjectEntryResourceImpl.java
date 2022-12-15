@@ -466,20 +466,21 @@ public class ObjectEntryResourceImpl extends BaseObjectEntryResourceImpl {
 	protected void preparePatch(
 		ObjectEntry objectEntry, ObjectEntry existingObjectEntry) {
 
-		if (objectEntry.getProperties() != null) {
-			existingObjectEntry.setProperties(
-				() -> {
-					ObjectEntry getObjectEntry = getObjectEntry(
-						existingObjectEntry.getId());
-
-					Map<String, Object> properties =
-						getObjectEntry.getProperties();
-
-					properties.putAll(objectEntry.getProperties());
-
-					return properties;
-				});
+		if (objectEntry.getProperties() == null) {
+			return;
 		}
+
+		existingObjectEntry.setProperties(
+			() -> {
+				ObjectEntry getObjectEntry = getObjectEntry(
+					existingObjectEntry.getId());
+
+				Map<String, Object> properties = getObjectEntry.getProperties();
+
+				properties.putAll(objectEntry.getProperties());
+
+				return properties;
+			});
 	}
 
 	private void _executeObjectAction(
