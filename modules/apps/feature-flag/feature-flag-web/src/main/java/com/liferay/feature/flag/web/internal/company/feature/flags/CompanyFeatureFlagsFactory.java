@@ -53,7 +53,7 @@ public class CompanyFeatureFlagsFactory {
 				return new CompanyFeatureFlags(Collections.emptyMap());
 			}
 
-			Map<String, FeatureFlag> featureFlagMap = new HashMap<>();
+			Map<String, FeatureFlag> featureFlagsMap = new HashMap<>();
 
 			Properties properties = PropsUtil.getProperties(
 				FeatureFlagConstants.FEATURE_FLAG + StringPool.PERIOD, true);
@@ -73,11 +73,11 @@ public class CompanyFeatureFlagsFactory {
 				featureFlag = new PreferenceAwareFeatureFlag(
 					companyId, featureFlag, _featureFlagPreferencesManager);
 
-				featureFlagMap.put(featureFlag.getKey(), featureFlag);
+				featureFlagsMap.put(featureFlag.getKey(), featureFlag);
 			}
 
 			return new CompanyFeatureFlags(
-				Collections.unmodifiableMap(featureFlagMap));
+				Collections.unmodifiableMap(featureFlagsMap));
 		}
 	}
 

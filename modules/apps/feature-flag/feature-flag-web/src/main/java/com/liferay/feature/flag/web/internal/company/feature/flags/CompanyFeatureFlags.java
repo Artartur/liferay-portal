@@ -35,17 +35,17 @@ import java.util.function.Predicate;
 public class CompanyFeatureFlags {
 
 	public CompanyFeatureFlags(FeatureFlag... featureFlags) {
-		Map<String, FeatureFlag> featureFlagMap = new HashMap<>();
+		Map<String, FeatureFlag> featureFlagsMap = new HashMap<>();
 
 		for (FeatureFlag featureFlag : featureFlags) {
-			featureFlagMap.put(featureFlag.getKey(), featureFlag);
+			featureFlagsMap.put(featureFlag.getKey(), featureFlag);
 		}
 
-		_featureFlagMap = featureFlagMap;
+		_featureFlagsMap = featureFlagsMap;
 	}
 
-	public CompanyFeatureFlags(Map<String, FeatureFlag> featureFlagMap) {
-		_featureFlagMap = featureFlagMap;
+	public CompanyFeatureFlags(Map<String, FeatureFlag> featureFlagsMap) {
+		_featureFlagsMap = featureFlagsMap;
 	}
 
 	public List<FeatureFlag> getFeatureFlags(Predicate<FeatureFlag> predicate) {
@@ -55,7 +55,7 @@ public class CompanyFeatureFlags {
 			predicate = featureFlag -> true;
 		}
 
-		for (FeatureFlag featureFlag : _featureFlagMap.values()) {
+		for (FeatureFlag featureFlag : _featureFlagsMap.values()) {
 			if (predicate.test(featureFlag)) {
 				featureFlags.add(featureFlag);
 			}
@@ -67,13 +67,13 @@ public class CompanyFeatureFlags {
 	}
 
 	public String getJSON() {
-		if (_featureFlagMap.isEmpty()) {
+		if (_featureFlagsMap.isEmpty()) {
 			return PropsValues.FEATURE_FLAGS_JSON;
 		}
 
 		JSONObject jsonObject = new JSONObjectImpl();
 
-		for (FeatureFlag featureFlag : _featureFlagMap.values()) {
+		for (FeatureFlag featureFlag : _featureFlagsMap.values()) {
 			jsonObject.put(featureFlag.getKey(), featureFlag.isEnabled());
 		}
 
@@ -81,8 +81,8 @@ public class CompanyFeatureFlags {
 	}
 
 	public boolean isEnabled(String key) {
-		if (_featureFlagMap.containsKey(key)) {
-			FeatureFlag featureFlag = _featureFlagMap.get(key);
+		if (_featureFlagsMap.containsKey(key)) {
+			FeatureFlag featureFlag = _featureFlagsMap.get(key);
 
 			return featureFlag.isEnabled();
 		}
@@ -91,6 +91,6 @@ public class CompanyFeatureFlags {
 			PropsUtil.get(FeatureFlagConstants.getKey(key)));
 	}
 
-	private final Map<String, FeatureFlag> _featureFlagMap;
+	private final Map<String, FeatureFlag> _featureFlagsMap;
 
 }
