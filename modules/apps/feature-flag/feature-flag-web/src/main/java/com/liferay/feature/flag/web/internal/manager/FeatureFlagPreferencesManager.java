@@ -52,12 +52,12 @@ public class FeatureFlagPreferencesManager {
 	}
 
 	private PortalPreferences _getPortalPreferences(long companyId) {
-		PortalPreferencesWrapper preferences =
+		PortalPreferencesWrapper portalPreferencesWrapper =
 			(PortalPreferencesWrapper)
 				_portalPreferencesLocalService.getPreferences(
 					companyId, PortletKeys.PREFS_OWNER_TYPE_COMPANY);
 
-		return preferences.getPortalPreferencesImpl();
+		return portalPreferencesWrapper.getPortalPreferencesImpl();
 	}
 
 	private static final String _NAMESPACE = FeatureFlagConstants.FEATURE_FLAG;
