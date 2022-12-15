@@ -349,15 +349,15 @@ public class ObjectEntryInfoItemFieldValuesProvider
 					objectField.getBusinessType(),
 					ObjectFieldConstants.BUSINESS_TYPE_ATTACHMENT)) {
 
-			long attachmentLong = GetterUtil.getLong(
+			long dlFileEntryId = GetterUtil.getLong(
 				values.get(objectField.getName()));
 
-			if (attachmentLong == GetterUtil.DEFAULT_LONG) {
+			if (dlFileEntryId == GetterUtil.DEFAULT_LONG) {
 				return StringPool.BLANK;
 			}
 
 			DLFileEntry dlFileEntry = _dlFileEntryLocalService.fetchDLFileEntry(
-				attachmentLong);
+				dlFileEntryId);
 
 			if (dlFileEntry == null) {
 				return StringPool.BLANK;
