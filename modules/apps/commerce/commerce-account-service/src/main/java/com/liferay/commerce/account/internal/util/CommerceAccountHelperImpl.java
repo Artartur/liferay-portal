@@ -138,7 +138,6 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.getCommerceChannelByGroupId(
 				commerceChannelGroupId);
-
 		long userId = _portal.getUserId(httpServletRequest);
 
 		CommerceAccount commerceAccount = CommerceAccountImpl.fromAccountEntry(
