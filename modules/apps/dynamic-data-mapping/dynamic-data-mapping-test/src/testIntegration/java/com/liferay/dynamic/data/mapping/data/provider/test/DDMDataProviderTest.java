@@ -87,7 +87,6 @@ public class DDMDataProviderTest {
 			"Default-Output", List.class);
 
 		Assert.assertNotNull(keyValuePairs);
-
 		Assert.assertEquals(keyValuePairs.toString(), 2, keyValuePairs.size());
 	}
 

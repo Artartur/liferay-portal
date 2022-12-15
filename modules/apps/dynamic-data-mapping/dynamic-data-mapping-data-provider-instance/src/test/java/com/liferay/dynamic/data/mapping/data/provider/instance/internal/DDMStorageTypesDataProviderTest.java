@@ -109,7 +109,6 @@ public class DDMStorageTypesDataProviderTest {
 			"Default-Output", List.class);
 
 		Assert.assertNotNull(keyValuePairs);
-
 		Assert.assertEquals(expectedKeyValuePairs, keyValuePairs);
 	}
 

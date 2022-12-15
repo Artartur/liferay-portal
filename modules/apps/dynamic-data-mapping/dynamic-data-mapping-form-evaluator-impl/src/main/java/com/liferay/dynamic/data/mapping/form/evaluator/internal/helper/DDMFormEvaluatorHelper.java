@@ -720,14 +720,16 @@ public class DDMFormEvaluatorHelper {
 
 	private void _localizeNumericDDMFormFieldValues() {
 		for (DDMFormField ddmFormField : _ddmFormFieldsMap.values()) {
-			if (_isNumericField(ddmFormField)) {
-				for (DDMFormEvaluatorFieldContextKey
-						ddmFormEvaluatorFieldContextKey :
-							_getDDMFormEvaluatorFieldContextKeys(
-								ddmFormField.getName())) {
+			if (!_isNumericField(ddmFormField)) {
+				continue;
+			}
 
-					_localizeDDMFormFieldValue(ddmFormEvaluatorFieldContextKey);
-				}
+			for (DDMFormEvaluatorFieldContextKey
+					ddmFormEvaluatorFieldContextKey :
+						_getDDMFormEvaluatorFieldContextKeys(
+							ddmFormField.getName())) {
+
+				_localizeDDMFormFieldValue(ddmFormEvaluatorFieldContextKey);
 			}
 		}
 	}
@@ -799,34 +801,36 @@ public class DDMFormEvaluatorHelper {
 					ddmFormEvaluatorFieldContextKey :
 						_getDDMFormEvaluatorFieldContextKeys(key)) {
 
-				if (_filterVisibleFieldsMarkedAsRequired(
-						ddmFormEvaluatorFieldContextKey) &&
-					_isFieldEmpty(ddmFormEvaluatorFieldContextKey)) {
+				if (!_filterVisibleFieldsMarkedAsRequired(
+						ddmFormEvaluatorFieldContextKey) ||
+					!_isFieldEmpty(ddmFormEvaluatorFieldContextKey)) {
 
-					String requiredErrorMessage = LanguageUtil.get(
-						_ddmFormEvaluatorEvaluateRequest.getLocale(),
-						"this-field-is-required");
-
-					DDMFormField ddmFormField = _ddmFormFieldsMap.get(
-						ddmFormEvaluatorFieldContextKey.getName());
-
-					LocalizedValue localizedValue =
-						ddmFormField.getRequiredErrorMessage();
-
-					if (localizedValue != null) {
-						Map<Locale, String> values = localizedValue.getValues();
-
-						String value = values.get(
-							_ddmFormEvaluatorEvaluateRequest.getLocale());
-
-						if (Validator.isNotNull(value)) {
-							requiredErrorMessage = value;
-						}
-					}
-
-					_setFieldAsInvalid(
-						ddmFormEvaluatorFieldContextKey, requiredErrorMessage);
+					continue;
 				}
+
+				String requiredErrorMessage = LanguageUtil.get(
+					_ddmFormEvaluatorEvaluateRequest.getLocale(),
+					"this-field-is-required");
+
+				DDMFormField ddmFormField = _ddmFormFieldsMap.get(
+					ddmFormEvaluatorFieldContextKey.getName());
+
+				LocalizedValue localizedValue =
+					ddmFormField.getRequiredErrorMessage();
+
+				if (localizedValue != null) {
+					Map<Locale, String> values = localizedValue.getValues();
+
+					String value = values.get(
+						_ddmFormEvaluatorEvaluateRequest.getLocale());
+
+					if (Validator.isNotNull(value)) {
+						requiredErrorMessage = value;
+					}
+				}
+
+				_setFieldAsInvalid(
+					ddmFormEvaluatorFieldContextKey, requiredErrorMessage);
 			}
 		}
 	}
@@ -837,14 +841,16 @@ public class DDMFormEvaluatorHelper {
 					ddmFormEvaluatorFieldContextKey :
 						_getDDMFormEvaluatorFieldContextKeys(key)) {
 
-				if (_isConfirmationValueInvalid(
-						ddmFormEvaluatorFieldContextKey) &&
-					_isFieldWithConfirmationFieldAndVisible(
+				if (!_isConfirmationValueInvalid(
+						ddmFormEvaluatorFieldContextKey) ||
+					!_isFieldWithConfirmationFieldAndVisible(
 						ddmFormEvaluatorFieldContextKey)) {
 
-					_setFieldAsInvalid(
-						ddmFormEvaluatorFieldContextKey, StringPool.BLANK);
+					continue;
 				}
+
+				_setFieldAsInvalid(
+					ddmFormEvaluatorFieldContextKey, StringPool.BLANK);
 			}
 		}
 	}
@@ -854,17 +860,19 @@ public class DDMFormEvaluatorHelper {
 			ddmFormFieldValidations = new HashMap<>();
 
 		for (DDMFormField ddmFormField : _ddmFormFieldsMap.values()) {
-			if (_filterFieldsWithDDMFormFieldValidation(ddmFormField)) {
-				for (DDMFormEvaluatorFieldContextKey
-						ddmFormEvaluatorFieldContextKey :
-							_getDDMFormEvaluatorFieldContextKeys(
-								ddmFormField.getName())) {
+			if (!_filterFieldsWithDDMFormFieldValidation(ddmFormField)) {
+				continue;
+			}
 
-					ddmFormFieldValidations.put(
-						ddmFormEvaluatorFieldContextKey,
-						_getDDMFormFieldValidation(
-							ddmFormEvaluatorFieldContextKey));
-				}
+			for (DDMFormEvaluatorFieldContextKey
+					ddmFormEvaluatorFieldContextKey :
+						_getDDMFormEvaluatorFieldContextKeys(
+							ddmFormField.getName())) {
+
+				ddmFormFieldValidations.put(
+					ddmFormEvaluatorFieldContextKey,
+					_getDDMFormFieldValidation(
+						ddmFormEvaluatorFieldContextKey));
 			}
 		}
 
@@ -991,46 +999,56 @@ public class DDMFormEvaluatorHelper {
 
 	private void _validateNumericFieldsWithInputMask() {
 		for (DDMFormField ddmFormField : _ddmFormFieldsMap.values()) {
-			if (_isIntegerNumericField(ddmFormField)) {
-				for (DDMFormEvaluatorFieldContextKey
-						ddmFormEvaluatorFieldContextKey :
-							_getDDMFormEvaluatorFieldContextKeys(
-								ddmFormField.getName())) {
+			if (!_isIntegerNumericField(ddmFormField)) {
+				continue;
+			}
 
-					if (_filterVisibleFieldsWithInputMask(
-							ddmFormEvaluatorFieldContextKey) &&
-						_isValueWithInputMaskInvalid(
-							ddmFormEvaluatorFieldContextKey)) {
+			for (DDMFormEvaluatorFieldContextKey
+					ddmFormEvaluatorFieldContextKey :
+						_getDDMFormEvaluatorFieldContextKeys(
+							ddmFormField.getName())) {
 
-						_setFieldAsInvalid(
-							ddmFormEvaluatorFieldContextKey,
-							LanguageUtil.get(
-								_ddmFormEvaluatorEvaluateRequest.getLocale(),
-								"input-format-is-not-satisfied"));
-					}
+				if (!_filterVisibleFieldsWithInputMask(
+						ddmFormEvaluatorFieldContextKey) ||
+					!_isValueWithInputMaskInvalid(
+						ddmFormEvaluatorFieldContextKey)) {
+
+					continue;
 				}
+
+				_setFieldAsInvalid(
+					ddmFormEvaluatorFieldContextKey,
+					LanguageUtil.get(
+						_ddmFormEvaluatorEvaluateRequest.getLocale(),
+						"input-format-is-not-satisfied"));
 			}
 		}
 	}
 
 	private void _validateObjectRelationshipFields() {
 		for (DDMFormField ddmFormField : _ddmFormFieldsMap.values()) {
-			if (Objects.equals(ddmFormField.getType(), "object-relationship")) {
-				for (DDMFormEvaluatorFieldContextKey
-						ddmFormEvaluatorFieldContextKey :
-							_getDDMFormEvaluatorFieldContextKeys(
-								ddmFormField.getName())) {
+			if (!Objects.equals(
+					ddmFormField.getType(), "object-relationship")) {
 
-					if (_isObjectRelationshipFieldInvalid(
-							ddmFormEvaluatorFieldContextKey)) {
+				continue;
+			}
 
-						_setFieldAsInvalid(
-							ddmFormEvaluatorFieldContextKey,
-							LanguageUtil.get(
-								_ddmFormEvaluatorEvaluateRequest.getLocale(),
-								"the-field-value-is-invalid"));
-					}
+			for (DDMFormEvaluatorFieldContextKey
+					ddmFormEvaluatorFieldContextKey :
+						_getDDMFormEvaluatorFieldContextKeys(
+							ddmFormField.getName())) {
+
+				if (!_isObjectRelationshipFieldInvalid(
+						ddmFormEvaluatorFieldContextKey)) {
+
+					continue;
 				}
+
+				_setFieldAsInvalid(
+					ddmFormEvaluatorFieldContextKey,
+					LanguageUtil.get(
+						_ddmFormEvaluatorEvaluateRequest.getLocale(),
+						"the-field-value-is-invalid"));
 			}
 		}
 	}
