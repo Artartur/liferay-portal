@@ -366,11 +366,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			}
 		}
 
-		// Commerce product attachment file entry
-
 		cpAttachmentFileEntryPersistence.remove(cpAttachmentFileEntry);
-
-		// DLFileEntry
 
 		FileEntry fileEntry = _dlAppLocalService.getFileEntry(
 			cpAttachmentFileEntry.getFileEntryId());
@@ -386,8 +382,6 @@ public class CPAttachmentFileEntryLocalServiceImpl
 					cpAttachmentFileEntry.getFileEntryId());
 			}
 		}
-
-		// Expando
 
 		_expandoRowLocalService.deleteRows(
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
