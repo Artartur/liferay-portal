@@ -245,20 +245,20 @@ public class DDMFormEvaluatorExpressionFieldAccessor
 	}
 
 	private Object _getFieldValues(String fieldName) {
+		List<Object> list = new ArrayList<>();
+
 		Set<DDMFormEvaluatorFieldContextKey> ddmFormFieldContextKeys =
 			_ddmFormEvaluatorFormValuesHelper.getDDMFormFieldContextKeys(
 				fieldName);
-
-		DDMFormFieldValueAccessor<?> ddmFormFieldValueAccessor =
-			_getDDMFormFieldValueAccessor(fieldName);
-
-		List<Object> list = new ArrayList<>();
 
 		for (DDMFormEvaluatorFieldContextKey ddmFormEvaluatorFieldContextKey :
 				ddmFormFieldContextKeys) {
 
 			list.add(getFieldValue(ddmFormEvaluatorFieldContextKey));
 		}
+
+		DDMFormFieldValueAccessor<?> ddmFormFieldValueAccessor =
+			_getDDMFormFieldValueAccessor(fieldName);
 
 		Object[] values = list.toArray(
 			ddmFormFieldValueAccessor.getArrayGenericType());

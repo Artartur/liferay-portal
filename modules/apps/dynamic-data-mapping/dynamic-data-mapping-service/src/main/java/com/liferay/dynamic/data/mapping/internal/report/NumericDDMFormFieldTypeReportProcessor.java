@@ -147,7 +147,6 @@ public class NumericDDMFormFieldTypeReportProcessor
 			BigDecimal maxValueBigDecimal = Collections.max(
 				valueBigDecimals,
 				Comparator.comparingDouble(Number::doubleValue));
-
 			BigDecimal minValueBigDecimal = Collections.min(
 				valueBigDecimals,
 				Comparator.comparingDouble(Number::doubleValue));
