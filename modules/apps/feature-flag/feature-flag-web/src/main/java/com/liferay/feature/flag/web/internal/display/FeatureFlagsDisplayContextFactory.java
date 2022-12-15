@@ -53,7 +53,8 @@ import org.osgi.service.component.annotations.Reference;
 public class FeatureFlagsDisplayContextFactory {
 
 	public FeatureFlagsDisplayContext create(
-		HttpServletRequest httpServletRequest, FeatureFlagStatus featureFlagStatus) {
+		FeatureFlagStatus featureFlagStatus,
+		HttpServletRequest httpServletRequest) {
 
 		FeatureFlagsDisplayContext featureFlagsDisplayContext =
 			new FeatureFlagsDisplayContext();
