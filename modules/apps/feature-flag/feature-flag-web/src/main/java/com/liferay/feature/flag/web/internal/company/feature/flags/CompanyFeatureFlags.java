@@ -16,7 +16,7 @@ package com.liferay.feature.flag.web.internal.company.feature.flags;
 
 import com.liferay.feature.flag.web.internal.constants.FeatureFlagConstants;
 import com.liferay.feature.flag.web.internal.model.FeatureFlag;
-import com.liferay.portal.json.JSONObjectImpl;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -71,7 +71,7 @@ public class CompanyFeatureFlags {
 			return PropsValues.FEATURE_FLAGS_JSON;
 		}
 
-		JSONObject jsonObject = new JSONObjectImpl();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		for (FeatureFlag featureFlag : _featureFlagsMap.values()) {
 			jsonObject.put(featureFlag.getKey(), featureFlag.isEnabled());

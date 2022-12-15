@@ -18,8 +18,8 @@ import com.liferay.feature.flag.web.internal.constants.FeatureFlagConstants;
 import com.liferay.feature.flag.web.internal.model.FeatureFlag;
 import com.liferay.feature.flag.web.internal.model.FeatureFlagImpl;
 import com.liferay.feature.flag.web.internal.model.FeatureFlagStatus;
-import com.liferay.portal.json.JSONObjectImpl;
 import com.liferay.portal.kernel.json.JSONException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.test.randomizerbumpers.NumericStringRandomizerBumper;
 import com.liferay.portal.kernel.test.randomizerbumpers.UniqueStringRandomizerBumper;
@@ -79,9 +79,8 @@ public class CompanyFeatureFlagsTest {
 
 	@Test
 	public void testGetJSON() throws JSONException {
-		String json = _companyFeatureFlags.getJSON();
-
-		JSONObject jsonObject = new JSONObjectImpl(json);
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
+			_companyFeatureFlags.getJSON());
 
 		Set<String> keySet = jsonObject.keySet();
 
