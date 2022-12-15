@@ -54,14 +54,13 @@ public class FeatureFlagsManagementToolbarDisplayContext
 					return true;
 				}
 
-				if (Objects.equals(currentValue, "enabled") &&
-					featureFlag.isEnabled()) {
+				if (Objects.equals(currentValue, "disabled") &&
+					!featureFlag.isEnabled()) {
 
 					return true;
 				}
-
-				if (Objects.equals(currentValue, "disabled") &&
-					!featureFlag.isEnabled()) {
+				else if (Objects.equals(currentValue, "enabled") &&
+					featureFlag.isEnabled()) {
 
 					return true;
 				}
