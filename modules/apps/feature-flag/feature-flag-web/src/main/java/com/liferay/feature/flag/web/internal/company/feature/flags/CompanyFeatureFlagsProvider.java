@@ -52,11 +52,9 @@ public class CompanyFeatureFlagsProvider
 	}
 
 	public <T> T withCompanyFeatureFlags(
-		long companyId,
-		Function<CompanyFeatureFlags, T> companyFeatureFlagsFunction) {
+		long companyId, Function<CompanyFeatureFlags, T> function) {
 
-		return companyFeatureFlagsFunction.apply(
-			_companyFeatureFlagsMap.get(companyId));
+		return function.apply(_companyFeatureFlagsMap.get(companyId));
 	}
 
 	@Activate
