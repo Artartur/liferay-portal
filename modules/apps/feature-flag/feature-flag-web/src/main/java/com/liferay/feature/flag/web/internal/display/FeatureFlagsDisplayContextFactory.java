@@ -53,7 +53,7 @@ import org.osgi.service.component.annotations.Reference;
 public class FeatureFlagsDisplayContextFactory {
 
 	public FeatureFlagsDisplayContext create(
-		HttpServletRequest httpServletRequest, FeatureFlagStatus status) {
+		HttpServletRequest httpServletRequest, FeatureFlagStatus featureFlagStatus) {
 
 		FeatureFlagsDisplayContext featureFlagsDisplayContext =
 			new FeatureFlagsDisplayContext();
@@ -61,7 +61,7 @@ public class FeatureFlagsDisplayContextFactory {
 		Locale locale = _portal.getLocale(httpServletRequest);
 
 		featureFlagsDisplayContext.setDescription(
-			status.getDescription(locale));
+			featureFlagStatus.getDescription(locale));
 
 		PortletRequest portletRequest =
 			(PortletRequest)httpServletRequest.getAttribute(
@@ -98,7 +98,7 @@ public class FeatureFlagsDisplayContextFactory {
 				portletRequest, ConfigurationAdminPortletKeys.INSTANCE_SETTINGS,
 				"order-by-type", "asc"));
 
-		Predicate<FeatureFlag> predicate = status.getPredicate();
+		Predicate<FeatureFlag> predicate = featureFlagStatus.getPredicate();
 
 		String keywords = ParamUtil.getString(portletRequest, "keywords");
 
@@ -159,7 +159,7 @@ public class FeatureFlagsDisplayContextFactory {
 			featureFlagsDisplayContext.setSearchResultCssClass("list-group");
 		}
 
-		featureFlagsDisplayContext.setTitle(status.getTitle(locale));
+		featureFlagsDisplayContext.setTitle(featureFlagStatus.getTitle(locale));
 
 		return featureFlagsDisplayContext;
 	}
