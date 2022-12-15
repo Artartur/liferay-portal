@@ -2679,7 +2679,9 @@ public class ServiceBuilder {
 
 					content = StringUtil.replace(
 						content, "PortalException",
-						"DuplicateExternalReferenceCodeException");
+						isVersionGTE_7_4_0() ?
+							"DuplicateExternalReferenceCodeException" :
+								"SystemException");
 				}
 				else if (exception.startsWith("NoSuch")) {
 					content = StringUtil.replace(
