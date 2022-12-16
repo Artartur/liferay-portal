@@ -106,13 +106,13 @@ public class ObjectActionEngineImpl implements ObjectActionEngine {
 			return;
 		}
 
-		long principalUserId = PrincipalThreadLocal.getUserId();
+		long principalThreadLocalUserId = PrincipalThreadLocal.getUserId();
 
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
 		try {
-			if (principalUserId != userId) {
+			if (principalThreadLocalUserId != userId) {
 				PrincipalThreadLocal.setName(userId);
 			}
 
@@ -142,8 +142,8 @@ public class ObjectActionEngineImpl implements ObjectActionEngine {
 			}
 		}
 		finally {
-			if (principalUserId != userId) {
-				PrincipalThreadLocal.setName(principalUserId);
+			if (principalThreadLocalUserId != userId) {
+				PrincipalThreadLocal.setName(principalThreadLocalUserId);
 			}
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
