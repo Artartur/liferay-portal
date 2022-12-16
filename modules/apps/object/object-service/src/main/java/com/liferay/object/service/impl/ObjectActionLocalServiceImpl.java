@@ -99,24 +99,17 @@ public class ObjectActionLocalServiceImpl
 
 		User user = _userLocalService.getUser(userId);
 
-		long companyId = user.getCompanyId();
-
 		_validateParametersUnicodeProperties(
-			companyId, conditionExpression, objectActionExecutorKey,
+			user.getCompanyId(), conditionExpression, objectActionExecutorKey,
 			objectActionTriggerKey, parametersUnicodeProperties);
-
-		ObjectDefinition objectDefinition =
-			_objectDefinitionPersistence.findByPrimaryKey(objectDefinitionId);
 
 		ObjectAction objectAction = objectActionPersistence.create(
 			counterLocalService.increment());
 
-		objectAction.setCompanyId(companyId);
+		objectAction.setCompanyId(user.getCompanyId());
 		objectAction.setUserId(user.getUserId());
 		objectAction.setUserName(user.getFullName());
-
-		objectAction.setObjectDefinitionId(
-			objectDefinition.getObjectDefinitionId());
+		objectAction.setObjectDefinitionId(objectDefinitionId);
 		objectAction.setActive(active);
 		objectAction.setConditionExpression(conditionExpression);
 		objectAction.setDescription(description);
@@ -202,11 +195,10 @@ public class ObjectActionLocalServiceImpl
 		ObjectAction objectAction = objectActionPersistence.findByPrimaryKey(
 			objectActionId);
 
-		User user = _userLocalService.getUser(objectAction.getUserId());
-
 		_validateParametersUnicodeProperties(
-			user.getCompanyId(), conditionExpression, objectActionExecutorKey,
-			objectActionTriggerKey, parametersUnicodeProperties);
+			objectAction.getCompanyId(), conditionExpression,
+			objectActionExecutorKey, objectActionTriggerKey,
+			parametersUnicodeProperties);
 
 		objectAction.setActive(active);
 		objectAction.setConditionExpression(conditionExpression);
