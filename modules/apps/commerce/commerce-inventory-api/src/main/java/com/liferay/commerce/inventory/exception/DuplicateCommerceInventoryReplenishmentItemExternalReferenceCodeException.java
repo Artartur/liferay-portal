@@ -14,14 +14,14 @@
 
 package com.liferay.commerce.inventory.exception;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.exception.DuplicateExternalReferenceCodeException;
 
 /**
  * @author Luca Pellizzon
  */
 public class
 	DuplicateCommerceInventoryReplenishmentItemExternalReferenceCodeException
-		extends SystemException {
+		extends DuplicateExternalReferenceCodeException {
 
 	public DuplicateCommerceInventoryReplenishmentItemExternalReferenceCodeException() {
 	}
