@@ -206,8 +206,13 @@ public class PoshiRunnerExecutor {
 
 			String childElementName = childElement.getName();
 
-			if (childElementName.equals("echo") ||
-				childElementName.equals("description")) {
+			if (childElementName.equals("break") ||
+				childElementName.equals("continue")) {
+
+				evaluateLoopElement(childElement);
+			}
+			else if (childElementName.equals("echo") ||
+					 childElementName.equals("description")) {
 
 				runEchoElement(childElement);
 			}
@@ -227,11 +232,6 @@ public class PoshiRunnerExecutor {
 				else if (childElement.attributeValue("method") != null) {
 					runMethodExecuteElement(childElement);
 				}
-			}
-			else if (childElementName.equals("break") ||
-					 childElementName.equals("continue")) {
-
-				evaluateLoopElement(childElement);
 			}
 			else if (childElementName.equals("if")) {
 				runIfElement(childElement);
