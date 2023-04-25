@@ -65,7 +65,8 @@ export default function LocalesList({
 					onLocaleClicked={() =>
 						onLocaleClicked && onLocaleClicked(locale)
 					}
-				>
+					>{console.log("test")}
+					{console.log("locale: ", locale)}
 					{(changeableDefaultLanguage &&
 						defaultLocale === locale.id) ||
 						(locale.id !== defaultLocale && (

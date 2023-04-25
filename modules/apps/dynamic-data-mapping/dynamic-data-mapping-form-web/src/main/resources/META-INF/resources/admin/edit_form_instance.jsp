@@ -124,7 +124,7 @@ renderResponse.setTitle((formInstance == null) ? LanguageUtil.get(request, "new-
 			changeableDefaultLanguage="<%= false %>"
 			defaultLanguageId="<%= ddmFormAdminDisplayContext.getDefaultLanguageId() %>"
 			id="translationManager"
-		/>
+		/>test
 	</clay:container-fluid>
 
 	<aui:form action="<%= saveFormInstanceURL %>" cssClass="ddm-form-builder-form" enctype="multipart/form-data" method="post" name="editForm">
