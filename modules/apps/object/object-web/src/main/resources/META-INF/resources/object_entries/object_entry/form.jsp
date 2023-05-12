@@ -114,10 +114,12 @@ portletDisplay.setURLBack(backURL);
 				const form = document.getElementById('<portlet:namespace />fm');
 
 				const DDMFormInstance = Liferay.component('editObjectEntry');
-
+				<%-- debugger; --%>
 				const current = DDMFormInstance.reactComponentRef.current;
-
+				console.log(DDMFormInstance)
 				current.validate().then((result) => {
+				console.log("result: ",result)
+					<%-- debugger; --%>
 					if (result) {
 						const fields = current.getFields();
 						let shouldSubmitForm = true;
