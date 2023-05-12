@@ -38,9 +38,11 @@ export default function formValidate({
 		}).then((evaluatedPages) => {
 			let validForm = true;
 			const visitor = new PagesVisitor(evaluatedPages);
-
+			console.log("visitor ",visitor);
+			console.log("evaluated pages: ",evaluatedPages);
 			visitor.mapFields(
 				({valid}) => {
+					console.log("valid", valid);
 					if (!valid) {
 						validForm = false;
 					}
@@ -58,7 +60,7 @@ export default function formValidate({
 					type: EVENT_TYPES.PAGE.VALIDATION_FAILED,
 				});
 			}
-
+			console.log("validForm: ",validForm)
 			return Promise.resolve(validForm);
 		});
 	};

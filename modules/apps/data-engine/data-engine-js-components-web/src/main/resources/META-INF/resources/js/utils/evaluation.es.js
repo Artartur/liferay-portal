@@ -140,7 +140,7 @@ const doEvaluate = debounce((fieldName, evaluatorContext, callback) => {
 	if (window.AbortController) {
 		controller = new AbortController();
 	}
-
+	console.log("evaluatorContext", evaluatorContext);
 	makeFetch({
 		body: convertToFormData({
 			languageId: editingLanguageId,
@@ -160,6 +160,7 @@ const doEvaluate = debounce((fieldName, evaluatorContext, callback) => {
 		url: EVALUATOR_URL,
 	})
 		.then((newPages) => {
+			console.log("newpages ",newPages)
 			const mergedPages = mergePages(
 				defaultLanguageId,
 				editingLanguageId,
@@ -180,7 +181,7 @@ export function evaluate(fieldName, evaluatorContext) {
 			if (error) {
 				return reject(error);
 			}
-
+			console.log("pages in Promise", resolve(pages));
 			resolve(pages);
 		});
 	});
