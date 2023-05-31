@@ -1680,4 +1680,90 @@ definition {
 			publicationList = "Publication Name 3,Publication Name 2,Publication Name 1");
 	}
 
+	    test AssertPublicationsHistoryRemainsAfterUpgrade {
+        property custom.properties = "feature.flag.LPS-161033=true";
+        property legacy.database.dump = "true";
+        property testray.main.component.name = "Upgrades Publications";
+
+        task ("Add new site and a new page in it") {
+            JSONGroup.addGroup(groupName = "Site Name");
+
+            JSONLayout.addPublicLayout(
+                groupName = "Site Name",
+                layoutName = "Page Name");
+
+        }
+
+        task ("Add Web Content"){
+            JSONWebcontent.addWebContent(
+                content = "WC Content",
+                groupName = "Site Name",
+                title = "WC WebContent Content");
+        }
+
+        task ("Add and select a new Publication 1") {
+            JSONPublications.addPublication(publicationName = "Publication Name 1");
+
+            JSONPublications.selectPublication(publicationName = "Publication Name 1");
+
+        }
+        task ("Edit Web Content") {
+            Navigator.openSiteURL(siteName = "Site Name");
+
+            ProductMenu.gotoPortlet(
+                category = "Content & Data",
+                portlet = "Web Content");
+
+            WebContentNavigator.gotoEditCP(webContentTitle = "WC WebContent Content");
+
+            WebContent.editCP(
+                webContentContentEdit = "WC WebContent Content",
+                webContentTitle = "WC WebContent Title Edit Publication 1",
+                webContentTitleEdit = "WC WebContent Title Edit");
+        }
+        
+        task ("Assert that the timeline of Publication 1 is present") {
+            ProductMenu.gotoPortlet(
+                category = "Content & Data",
+                portlet = "Web Content");
+
+            WebContentNavigator.gotoEditCP(webContentTitle = "WC WebContent Title Edit Publication 1");
+
+			Publications.viewPublicationTimeline(publicationName = "Publication Name 1");
+            
+		}
+
+		task ("Add and select a new Publication 2") {
+			JSONPublications.addPublication(publicationName = "Publication Name 2");
+
+			JSONPublications.selectPublication(publicationName = "Publication Name 2");
+		}
+    
+        task ("Edit Web Content in Publication 2") {
+            Navigator.openSiteURL(siteName = "Site Name");
+
+            ProductMenu.gotoPortlet(
+                category = "Content & Data",
+                portlet = "Web Content");
+
+            WebContentNavigator.gotoEditCP(webContentTitle = "WC WebContent Content");
+
+            WebContent.editCP(
+                webContentContentEdit = "WC WebContent Title Edit Publication 2",
+                webContentTitle = "WC WebContent Title",
+                webContentTitleEdit = "WC WebContent Title Edit");
+        }
+                
+        task ("Assert that the timeline of Publication 2 is present") {
+            ProductMenu.gotoPortlet(
+                category = "Content & Data",
+                portlet = "Web Content");
+
+            WebContentNavigator.gotoEditCP(webContentTitle = "WC WebContent Title Edit Publication 2");
+
+			Publications.viewPublicationTimeline(publicationName = "Publication Name 2");
+            
+		}
+		}
+
 }
