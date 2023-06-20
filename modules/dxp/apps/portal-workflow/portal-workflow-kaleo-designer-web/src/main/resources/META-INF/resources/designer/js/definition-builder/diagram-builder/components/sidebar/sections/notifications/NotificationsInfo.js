@@ -87,7 +87,7 @@ const NotificationsInfo = ({
 	...restProps
 }) => {
 	const {selectedItem, setSelectedItem} = useContext(DiagramBuilderContext);
-
+	console.log('selectedItem: ', selectedItem);
 	const [executionType, setExecutionType] = useState(
 		selectedItem.data.notifications?.executionType?.[notificationIndex] ||
 			(selectedItem.type === 'task' ? 'onAssignment' : 'onEntry')
@@ -106,6 +106,13 @@ const NotificationsInfo = ({
 	);
 
 	const [notificationTypeEmail, setNotificationTypeEmail] = useState(
+		selectedItem.data.notifications?.notificationTypes?.[
+			notificationIndex
+		]?.some((value) => value.notificationType === 'email') || false
+	);
+
+	console.log(
+		'selectedItem.data: ',
 		selectedItem.data.notifications?.notificationTypes?.[
 			notificationIndex
 		]?.some((value) => value.notificationType === 'email') || false
@@ -152,16 +159,14 @@ const NotificationsInfo = ({
 			recipientTypeHolder = getRecipientType(
 				selectedItem.data.notifications?.recipients?.[notificationIndex]
 			);
-		}
-		else {
+		} else {
 			recipientTypeHolder = getRecipientType(
 				selectedItem.data.notifications?.recipients?.[
 					notificationIndex
 				][0]
 			);
 		}
-	}
-	else {
+	} else {
 		recipientTypeHolder = 'assetCreator';
 	}
 
@@ -218,6 +223,7 @@ const NotificationsInfo = ({
 			});
 		}
 
+		console.log('notificationTypes: ', notificationTypes);
 		updateNotificationInfo({
 			description: notificationDescription,
 			executionType,
@@ -265,12 +271,18 @@ const NotificationsInfo = ({
 					...prev[notificationIndex],
 					...item,
 				};
-
 				updateSelectedItem(prev);
-
-				return prev;
 			});
+		} else {
+			setSections((prev) => {
+				prev[notificationIndex] = {
+					notificationIndex,
+					item,
+				};
+			});
+			updateSelectedItem(prev);
 		}
+		return prev;
 	};
 
 	if (selectedItem.type === 'task') {
@@ -295,8 +307,7 @@ const NotificationsInfo = ({
 				value: 'onAssignment',
 			});
 		}
-	}
-	else if (selectedItem.type !== 'task') {
+	} else if (selectedItem.type !== 'task') {
 		recipientTypeOptions = recipientTypeOptions.filter(({value}) => {
 			return value !== 'taskAssignees';
 		});
@@ -313,17 +324,24 @@ const NotificationsInfo = ({
 			})
 			.map((item) => item.label);
 
+		console.log(
+			'filter: ',
+			items
+				.filter((item) => {
+					return item.checked === true;
+				})
+				.map((item) => item.label)
+		);
+
 		if (checkedTrue.includes(Liferay.Language.get('email'))) {
 			setNotificationTypeEmail(true);
-		}
-		else {
+		} else {
 			setNotificationTypeEmail(false);
 		}
 
 		if (checkedTrue.includes(Liferay.Language.get('user-notification'))) {
 			setNotificationTypeUserNotification(true);
-		}
-		else {
+		} else {
 			setNotificationTypeUserNotification(false);
 		}
 
@@ -347,8 +365,7 @@ const NotificationsInfo = ({
 							notificationIndex
 						].emailAddress;
 					}
-				}
-				else if (recipientType === 'taskAssignees') {
+				} else if (recipientType === 'taskAssignees') {
 					recipientDetails = {assignmentType: ['taskAssignees']};
 				}
 
@@ -369,8 +386,7 @@ const NotificationsInfo = ({
 						],
 						...currentRecipient,
 					};
-				}
-				else {
+				} else {
 					previousItem.data.notifications.recipients[
 						notificationIndex
 					] = currentRecipient;
@@ -401,8 +417,7 @@ const NotificationsInfo = ({
 					roleType: recipients.roleType[i],
 				});
 			}
-		}
-		else if (
+		} else if (
 			recipients &&
 			selectedItem.data.notifications.recipients[notificationIndex]
 				.sectionsData &&
