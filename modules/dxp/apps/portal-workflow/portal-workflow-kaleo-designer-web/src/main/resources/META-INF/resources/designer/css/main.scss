@@ -260,6 +260,12 @@
 	.sheet {
 		margin-top: 20px;
 	}
+
+	@media (max-width: 768px) {
+		.button-holder {
+			position: fixed;
+		}
+	}
 }
 
 .dialog-with-footer {
