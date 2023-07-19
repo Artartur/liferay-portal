@@ -29,7 +29,7 @@ export default function SourceBuilder() {
 	const {
 		currentEditor,
 		definitionDescription,
-		definitionName,
+		definitionTitle,
 		elements,
 		setCurrentEditor,
 		version,
@@ -47,7 +47,7 @@ export default function SourceBuilder() {
 		if (currentEditor?.mode === 'source' && elements) {
 			const metadata = {
 				description: definitionDescription,
-				name: definitionName,
+				name: definitionTitle,
 				version,
 			};
 
@@ -66,7 +66,7 @@ export default function SourceBuilder() {
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currentEditor, definitionName, elements, version]);
+	}, [currentEditor, definitionTitle, elements, version]);
 
 	useEffect(() => {
 		if (currentEditor && currentEditor.mode !== 'source') {
