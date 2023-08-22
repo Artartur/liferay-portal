@@ -378,7 +378,6 @@ export default function ViewObjectDefinitions({
 					objectDefinition={
 						deletedObjectDefinition as DeletedObjectDefinition
 					}
-					setDeletedObjectDefinition={setDeletedObjectDefinition}
 				/>
 			)}
 
