@@ -67,6 +67,7 @@ export function ObjectDefinitionNode({
 	const [
 		{
 			baseResourceURL,
+			changeVisibilityModals,
 			editObjectDefinitionURL,
 			elements,
 			objectDefinitionPermissionsURL,
@@ -106,20 +107,11 @@ export function ObjectDefinitionNode({
 		}
 	};
 
-	const [showModal, setShowModal] = useState<Partial<ModelBuilderModals>>({
-		addObjectRelationship: false,
-		deleteObjectDefinition: false,
-		editObjectDefinitionExternalReferenceCode: false,
-	});
-
 	const [
 		objectRelationshipParameterRequired,
 		setObjectRelationshipParameterRequired,
 	] = useState(false);
-	const [
-		deletedObjectDefinition,
-		setDeletedObjectDefinition,
-	] = useState<DeletedObjectDefinition | null>();
+
 	const [newExternalReferenceCode, setNewExternalReferenceCode] = useState(
 		externalReferenceCode
 	);
@@ -138,20 +130,49 @@ export function ObjectDefinitionNode({
 	};
 
 	const handleShowDeleteObjectDefinitionModal = () => {
-		setShowModal({
-			deleteObjectDefinition: true,
+		dispatch({
+			payload: {
+				newChangeModalVisibility: {
+					...changeVisibilityModals,
+					deleteObjectDefinition: true,
+				},
+			},
+			type: TYPES.CHANGE_MODAL_VISIBILITY,
 		});
 	};
 
 	const handleShowEditObjectDefinitionExternalReferenceCodeModal = () => {
-		setShowModal({
-			editObjectDefinitionExternalReferenceCode: true,
+		dispatch({
+			payload: {
+				newChangeModalVisibility: {
+					...changeVisibilityModals,
+					editObjectDefinitionExternalReferenceCode: true,
+				},
+			},
+			type: TYPES.CHANGE_MODAL_VISIBILITY,
 		});
 	};
 
 	const handleShowRedirectObjectDefinitionModal = () => {
-		setShowModal({
-			redirectToEditObjectDefinitionDetails: true,
+		dispatch({
+			payload: {
+				newChangeModalVisibility: {
+					...changeVisibilityModals,
+					redirectToEditObjectDefinitionDetails: true,
+				},
+			},
+			type: TYPES.CHANGE_MODAL_VISIBILITY,
+		});
+	};
+
+	const handleDeleteObjectDefinition = (
+		deleteObjectDefinition: DeletedObjectDefinition
+	) => {
+		dispatch({
+			payload: {
+				newDeleteObjectDefinition: deleteObjectDefinition,
+			},
+			type: TYPES.SET_DELETE_OBJECT_DEFINITION,
 		});
 	};
 
@@ -233,7 +254,7 @@ export function ObjectDefinitionNode({
 						objectDefinitionId: id,
 						objectDefinitionName: name,
 						objectDefinitionPermissionsURL,
-						setDeletedObjectDefinition,
+						handleDeleteObjectDefinition,
 						status,
 					})}
 					handleSelectObjectDefinitionNode={
@@ -262,7 +283,7 @@ export function ObjectDefinitionNode({
 					}
 					isLinkedObjectDefinition={linkedObjectDefinition}
 					setShowAllObjectFields={setShowAllObjectFields}
-					setShowModal={setShowModal}
+					setShowModal={() => {}}
 					showAllObjectFields={showAllObjectFields}
 				/>
 
@@ -311,7 +332,7 @@ export function ObjectDefinitionNode({
 				</>
 			</div>
 
-			{showModal.addObjectField && (
+			{/* {changeVisibilityModals.addObjectField && (
 				<ModalAddObjectField
 					baseResourceURL={baseResourceURL}
 					creationLanguageId={defaultLanguageId}
@@ -340,32 +361,54 @@ export function ObjectDefinitionNode({
 								),
 								type: 'success',
 							});
-							setShowModal((prevState) => ({
-								...prevState,
-								addObjectField: false,
-							}));
+							// setShowModal((prevState) => ({
+							// 	...prevState,
+							// 	addObjectField: false,
+							// }));
 							setShowAllObjectFields(true);
 						}
 					}}
-					setVisibility={() =>
-						setShowModal((prevState) => ({
-							...prevState,
-							addObjectField: false,
-						}))
-					}
-				/>
-			)}
+					setVisibility={() => {
+						dispatch({
+							payload: {
+								objectDefinitionNodeDraggable: true,
+								objectDefinitionNodes: nodes,
+								objectRelationshipEdges: edges,
+								selectedObjectDefinitionId: id.toString(),
+							},
+							type:
+								TYPES.SET_SELECTED_OBJECT_DEFINITION_NODE_DRAGGRABLE,
+						});
 
-			{showModal.addObjectRelationship && (
+						// setShowModal((prevState) => ({
+						// 	...prevState,
+						// 	addObjectField: false,
+						// }));
+					}}
+				/>
+			)} */}
+
+			{/* {changeVisibilityModals.addObjectRelationship && (
 				<ModalAddObjectRelationship
 					baseResourceURL={baseResourceURL}
 					handleOnClose={() => {
-						setShowModal(
-							(previousState: Partial<ModelBuilderModals>) => ({
-								...previousState,
-								addObjectRelationship: false,
-							})
-						);
+						dispatch({
+							payload: {
+								objectDefinitionNodeDraggable: true,
+								objectDefinitionNodes: nodes,
+								objectRelationshipEdges: edges,
+								selectedObjectDefinitionId: id.toString(),
+							},
+							type:
+								TYPES.SET_SELECTED_OBJECT_DEFINITION_NODE_DRAGGRABLE,
+						});
+
+						// setShowModal(
+						// 	(previousState: Partial<ModelBuilderModals>) => ({
+						// 		...previousState,
+						// 		addObjectRelationship: false,
+						// 	})
+						// );
 					}}
 					objectDefinitionExternalReferenceCode1={
 						externalReferenceCode
@@ -378,35 +421,56 @@ export function ObjectDefinitionNode({
 					}
 					reload={false}
 				/>
-			)}
+			)} */}
 
-			{showModal.deleteObjectDefinition && (
+			{/* {changeVisibilityModals.deleteObjectDefinition && (
 				<ModalDeleteObjectDefinition
 					handleOnClose={() => {
-						setShowModal(
-							(previousState: Partial<ModelBuilderModals>) => ({
-								...previousState,
-								deleteObjectDefinition: false,
-							})
-						);
+						dispatch({
+							payload: {
+								objectDefinitionNodeDraggable: true,
+								objectDefinitionNodes: nodes,
+								objectRelationshipEdges: edges,
+								selectedObjectDefinitionId: id.toString(),
+							},
+							type:
+								TYPES.SET_SELECTED_OBJECT_DEFINITION_NODE_DRAGGRABLE,
+						});
+
+						// setShowModal(
+						// 	(previousState: Partial<ModelBuilderModals>) => ({
+						// 		...previousState,
+						// 		deleteObjectDefinition: false,
+						// 	})
+						// );
 					}}
 					objectDefinition={
 						deletedObjectDefinition as DeletedObjectDefinition
 					}
 					setDeletedObjectDefinition={setDeletedObjectDefinition}
 				/>
-			)}
+			)} */}
 
-			{showModal.editObjectDefinitionExternalReferenceCode && (
+			{/* {changeVisibilityModals.editObjectDefinitionExternalReferenceCode && (
 				<ModalEditExternalReferenceCode
 					externalReferenceCode={newExternalReferenceCode as string}
 					handleOnClose={() => {
-						setShowModal(
-							(previousState: Partial<ModelBuilderModals>) => ({
-								...previousState,
-								editObjectDefinitionExternalReferenceCode: false,
-							})
-						);
+						dispatch({
+							payload: {
+								newChangeModalVisibility: {
+									...changeVisibilityModals,
+									addObjectDefinition: false,
+								},
+							},
+							type: TYPES.CHANGE_MODAL_VISIBILITY,
+						});
+
+						// setShowModal(
+						// 	(previousState: Partial<ModelBuilderModals>) => ({
+						// 		...previousState,
+						// 		editObjectDefinitionExternalReferenceCode: false,
+						// 	})
+						// );
 					}}
 					helpMessage={Liferay.Language.get(
 						'unique-key-for-referencing-the-object-definition'
@@ -443,9 +507,9 @@ export function ObjectDefinitionNode({
 					saveURL={`/o/object-admin/v1.0/object-definitions/${id}`}
 					setExternalReferenceCode={setNewExternalReferenceCode}
 				/>
-			)}
+			)} */}
 
-			{showModal.redirectToEditObjectDefinitionDetails && (
+			{/* {changeVisibilityModals.redirectToEditObjectDefinitionDetails && (
 				<RedirectToEditObjectDetailsModal
 					handleOnClose={() => {
 						setShowModal({
@@ -454,7 +518,7 @@ export function ObjectDefinitionNode({
 					}}
 					viewObjectDetailsURL={viewObjectDetailsURL}
 				/>
-			)}
+			)} */}
 		</>
 	);
 }

@@ -833,6 +833,24 @@ export function ObjectFolderReducer(state: TState, action: TAction): TState {
 			};
 		}
 
+		case TYPES.CHANGE_MODAL_VISIBILITY: {
+			const {newChangeModalVisibility} = action.payload;
+
+			return {
+				...state,
+				changeVisibilityModals: newChangeModalVisibility,
+			};
+		}
+
+		case TYPES.SET_DELETE_OBJECT_DEFINITION: {
+			const {newDeleteObjectDefinition} = action.payload;
+
+			return {
+				...state,
+				deleteObjectDefinition: newDeleteObjectDefinition,
+			};
+		}
+
 		case TYPES.SET_SELECTED_OBJECT_DEFINITION_NODE_POSITION: {
 			const {
 				newObjectDefinitionNodePosition,

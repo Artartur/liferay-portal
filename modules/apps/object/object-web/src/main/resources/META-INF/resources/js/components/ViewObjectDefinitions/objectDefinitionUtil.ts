@@ -20,7 +20,7 @@ type DeleteObjectDefinitionProps = {
 	handleShowDeleteObjectDefinitionModal: () => void;
 	objectDefinitionId: number;
 	objectDefinitionName: string;
-	setDeletedObjectDefinition: (value: DeletedObjectDefinition) => void;
+	handleDeleteObjectDefinition: (value: DeletedObjectDefinition) => void;
 	status: string;
 };
 
@@ -34,7 +34,7 @@ type ObjectDefinitionNodeActionsProps = {
 	objectDefinitionId: number;
 	objectDefinitionName: string;
 	objectDefinitionPermissionsURL: string;
-	setDeletedObjectDefinition: (value: DeletedObjectDefinition) => void;
+	handleDeleteObjectDefinition: (value: DeletedObjectDefinition) => void;
 	status: {
 		code: number;
 		label: string;
@@ -83,10 +83,10 @@ export async function deleteObjectDefinitionToast(
 
 export async function deleteObjectDefinition({
 	baseResourceURL,
+	handleDeleteObjectDefinition,
 	handleShowDeleteObjectDefinitionModal,
 	objectDefinitionId,
 	objectDefinitionName,
-	setDeletedObjectDefinition,
 	status,
 }: DeleteObjectDefinitionProps) {
 	const url = createResourceURL(baseResourceURL, {
@@ -110,7 +110,7 @@ export async function deleteObjectDefinition({
 		return;
 	}
 
-	setDeletedObjectDefinition({
+	handleDeleteObjectDefinition({
 		...{id: objectDefinitionId, name: objectDefinitionName},
 		hasObjectRelationship,
 		objectEntriesCount,
@@ -139,6 +139,7 @@ export async function deleteRelationship(id: number) {
 
 export function getObjectDefinitionNodeActions({
 	baseResourceURL,
+	handleDeleteObjectDefinition,
 	handleShowDeleteObjectDefinitionModal,
 	handleShowEditObjectDefinitionExternalReferenceCodeModal,
 	handleShowRedirectObjectDefinitionModal,
@@ -147,7 +148,6 @@ export function getObjectDefinitionNodeActions({
 	objectDefinitionId,
 	objectDefinitionName,
 	objectDefinitionPermissionsURL,
-	setDeletedObjectDefinition,
 	status,
 }: ObjectDefinitionNodeActionsProps) {
 	const PermissionUrl = formatActionURL(
@@ -162,7 +162,7 @@ export function getObjectDefinitionNodeActions({
 			handleShowDeleteObjectDefinitionModal,
 			objectDefinitionId,
 			objectDefinitionName,
-			setDeletedObjectDefinition,
+			handleDeleteObjectDefinition,
 			status: status.label,
 		});
 	};

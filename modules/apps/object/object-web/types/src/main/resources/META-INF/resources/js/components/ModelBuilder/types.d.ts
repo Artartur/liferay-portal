@@ -6,6 +6,7 @@
 /// <reference types="react" />
 
 import {Edge, Elements, Node} from 'react-flow-renderer';
+import {DeletedObjectDefinition} from '../ViewObjectDefinitions/ViewObjectDefinitions';
 import {TYPES} from './ModelBuilderContext/typesEnum';
 declare type TDropDownType =
 	| 'checkbox'
@@ -119,6 +120,18 @@ export declare type TAction =
 	  }
 	| {
 			payload: {
+				newChangeModalVisibility: ModelBuilderModals;
+			};
+			type: TYPES.CHANGE_MODAL_VISIBILITY;
+	  }
+	| {
+			payload: {
+				newDeleteObjectDefinition: DeletedObjectDefinition | null;
+			};
+			type: TYPES.SET_DELETE_OBJECT_DEFINITION;
+	  }
+	| {
+			payload: {
 				newObjectDefinitionNodePosition: {
 					x: number;
 					y: number;
@@ -183,6 +196,8 @@ export declare type TAction =
 	  };
 export declare type TState = {
 	baseResourceURL: string;
+	changeVisibilityModals: ModelBuilderModals;
+	deleteObjectDefinition: DeletedObjectDefinition | null;
 	editObjectDefinitionURL: string;
 	elements: Elements<ObjectDefinitionNodeData | ObjectRelationshipEdgeData>;
 	filterOperators: TFilterOperators;

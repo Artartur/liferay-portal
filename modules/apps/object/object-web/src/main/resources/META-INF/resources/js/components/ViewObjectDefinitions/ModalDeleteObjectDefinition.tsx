@@ -15,17 +15,19 @@ import {deleteObjectDefinitionToast} from './objectDefinitionUtil';
 interface ModalDeleteObjectDefinitionProps {
 	handleOnClose: () => void;
 	objectDefinition: DeletedObjectDefinition;
-	setDeletedObjectDefinition: (value: DeletedObjectDefinition | null) => void;
+	handleDeleteObjectDefinition: (
+		value: DeletedObjectDefinition | null
+	) => void;
 }
 
 export function ModalDeleteObjectDefinition({
+	handleDeleteObjectDefinition,
 	handleOnClose,
 	objectDefinition,
-	setDeletedObjectDefinition,
 }: ModalDeleteObjectDefinitionProps) {
 	const {observer, onClose} = useModal({
 		onClose: () => {
-			setDeletedObjectDefinition(null);
+			handleDeleteObjectDefinition(null);
 			handleOnClose();
 		},
 	});

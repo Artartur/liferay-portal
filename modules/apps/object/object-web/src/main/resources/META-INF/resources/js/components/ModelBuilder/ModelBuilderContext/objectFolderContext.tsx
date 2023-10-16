@@ -29,6 +29,21 @@ interface ObjectFolderContextProviderProps
 const ObjectFolderContext = createContext({} as ObjectFolderContextProps);
 
 const initialState = {
+	changeVisibilityModals: {
+		addObjectDefinition: false,
+		addObjectField: false,
+		addObjectFolder: false,
+		addObjectRelationship: false,
+		deleteObjectDefinition: false,
+		deleteObjectFolder: false,
+		deleteObjectRelationship: false,
+		editObjectDefinitionExternalReferenceCode: false,
+		editObjectFolder: false,
+		moveObjectDefinition: false,
+		publishObjectDefinitions: false,
+		redirectToEditObjectDefinitionDetails: false,
+	},
+	deleteObjectDefinition: {},
 	elements: [] as Elements<
 		ObjectDefinitionNodeData | ObjectRelationshipEdgeData
 	>,

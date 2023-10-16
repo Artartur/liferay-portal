@@ -28,7 +28,7 @@ export default function EditObjectFolderHeader({
 	setShowModal,
 }: EditObjectFolderHeaderProps) {
 	const [
-		{showChangesSaved, showSidebars},
+		{changeVisibilityModals, showChangesSaved, showSidebars},
 		dispatch,
 	] = useObjectFolderContext();
 
@@ -108,14 +108,15 @@ export default function EditObjectFolderHeader({
 								)}
 								displayType="unstyled"
 								onClick={() =>
-									setShowModal(
-										(
-											previousState: ModelBuilderModals
-										) => ({
-											...previousState,
-											editObjectFolder: true,
-										})
-									)
+									dispatch({
+										payload: {
+											newChangeModalVisibility: {
+												...changeVisibilityModals,
+												editObjectFolder: true,
+											},
+										},
+										type: TYPES.CHANGE_MODAL_VISIBILITY,
+									})
 								}
 								symbol="pencil"
 							/>
@@ -150,12 +151,15 @@ export default function EditObjectFolderHeader({
 						disabled={!hasDraftObjectDefinitions}
 						displayType="primary"
 						onClick={() => {
-							setShowModal(
-								(previousState: ModelBuilderModals) => ({
-									...previousState,
-									publishObjectDefinitions: true,
-								})
-							);
+							dispatch({
+								payload: {
+									newChangeModalVisibility: {
+										...changeVisibilityModals,
+										publishObjectDefinitions: true,
+									},
+								},
+								type: TYPES.CHANGE_MODAL_VISIBILITY,
+							});
 						}}
 						size="sm"
 					>

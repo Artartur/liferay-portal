@@ -10,12 +10,16 @@ import {NodeProps} from 'react-flow-renderer';
 import './EmptyNode.scss';
 
 import './NodeContainer.scss';
+import {useObjectFolderContext} from '../ModelBuilderContext/objectFolderContext';
+import {TYPES} from '../ModelBuilderContext/typesEnum';
 
 interface EmptyNodeProps {
 	setShowModal: (value: React.SetStateAction<ModelBuilderModals>) => void;
 }
 
 export function EmptyNode({data: {setShowModal}}: NodeProps<EmptyNodeProps>) {
+	const [{changeVisibilityModals}, dispatch] = useObjectFolderContext();
+
 	return (
 		<div className="lfr-objects__model-builder-node-container">
 			<div className="lfr-objects__model-builder-node-container-empty">
@@ -35,10 +39,15 @@ export function EmptyNode({data: {setShowModal}}: NodeProps<EmptyNodeProps>) {
 					aria-labelledby={Liferay.Language.get('create-new-object')}
 					displayType="primary"
 					onClick={() =>
-						setShowModal((previousState: ModelBuilderModals) => ({
-							...previousState,
-							addObjectDefinition: true,
-						}))
+						dispatch({
+							payload: {
+								newChangeModalVisibility: {
+									...changeVisibilityModals,
+									addObjectDefinition: true,
+								},
+							},
+							type: TYPES.CHANGE_MODAL_VISIBILITY,
+						})
 					}
 					size="sm"
 				>

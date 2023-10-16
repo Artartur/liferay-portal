@@ -11,7 +11,7 @@ declare type DeleteObjectDefinitionProps = {
 	handleShowDeleteObjectDefinitionModal: () => void;
 	objectDefinitionId: number;
 	objectDefinitionName: string;
-	setDeletedObjectDefinition: (value: DeletedObjectDefinition) => void;
+	handleDeleteObjectDefinition: (value: DeletedObjectDefinition) => void;
 	status: string;
 };
 declare type ObjectDefinitionNodeActionsProps = {
@@ -24,7 +24,7 @@ declare type ObjectDefinitionNodeActionsProps = {
 	objectDefinitionId: number;
 	objectDefinitionName: string;
 	objectDefinitionPermissionsURL: string;
-	setDeletedObjectDefinition: (value: DeletedObjectDefinition) => void;
+	handleDeleteObjectDefinition: (value: DeletedObjectDefinition) => void;
 	status: {
 		code: number;
 		label: string;
@@ -51,15 +51,16 @@ export declare function deleteObjectDefinitionToast(
 ): Promise<void>;
 export declare function deleteObjectDefinition({
 	baseResourceURL,
+	handleDeleteObjectDefinition,
 	handleShowDeleteObjectDefinitionModal,
 	objectDefinitionId,
 	objectDefinitionName,
-	setDeletedObjectDefinition,
 	status,
 }: DeleteObjectDefinitionProps): Promise<void>;
 export declare function deleteRelationship(id: number): Promise<void>;
 export declare function getObjectDefinitionNodeActions({
 	baseResourceURL,
+	handleDeleteObjectDefinition,
 	handleShowDeleteObjectDefinitionModal,
 	handleShowEditObjectDefinitionExternalReferenceCodeModal,
 	handleShowRedirectObjectDefinitionModal,
@@ -68,7 +69,6 @@ export declare function getObjectDefinitionNodeActions({
 	objectDefinitionId,
 	objectDefinitionName,
 	objectDefinitionPermissionsURL,
-	setDeletedObjectDefinition,
 	status,
 }: ObjectDefinitionNodeActionsProps): DropDownItems[];
 export declare function getObjectFolderActions(
