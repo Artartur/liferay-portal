@@ -7,6 +7,7 @@
 
 import {Edge, Elements, Node} from 'react-flow-renderer';
 import {TYPES} from './ModelBuilderContext/typesEnum';
+import {DeletedObjectDefinition} from '../ViewObjectDefinitions/ViewObjectDefinitions';
 declare type TDropDownType =
 	| 'checkbox'
 	| 'contextual'
@@ -94,6 +95,12 @@ export declare type TAction =
 				selectedObjectRelationshipEdgeId?: number;
 			};
 			type: TYPES.UPDATE_MODEL_BUILDER_STRUCTURE;
+	  }
+	| {
+			payload: {
+				newDeleteObjectDefinition: DeletedObjectDefinition | null;
+			};
+			type: TYPES.SET_DELETE_OBJECT_DEFINITION;
 	  }
 	| {
 			payload: {
@@ -190,6 +197,7 @@ export declare type TAction =
 export declare type TState = {
 	baseResourceURL: string;
 	changeModalVisibility: ModelBuilderModals;
+	deleteObjectDefinition: DeletedObjectDefinition | null;
 	editObjectDefinitionURL: string;
 	elements: Elements<ObjectDefinitionNodeData | ObjectRelationshipEdgeData>;
 	filterOperators: TFilterOperators;

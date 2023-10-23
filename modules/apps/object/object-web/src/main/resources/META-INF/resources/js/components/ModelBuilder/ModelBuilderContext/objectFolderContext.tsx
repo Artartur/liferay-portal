@@ -43,6 +43,7 @@ const initialState = {
 		publishObjectDefinitions: false,
 		redirectToEditObjectDefinitionDetails: false,
 	},
+	deleteObjectDefinition: {},
 	elements: [] as Elements<
 		ObjectDefinitionNodeData | ObjectRelationshipEdgeData
 	>,

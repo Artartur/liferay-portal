@@ -649,6 +649,15 @@ export function ObjectFolderReducer(state: TState, action: TAction): TState {
 			};
 		}
 
+		case TYPES.SET_DELETE_OBJECT_DEFINITION: {
+			const {newDeleteObjectDefinition} = action.payload;
+
+			return {
+				...state,
+				deleteObjectDefinition: newDeleteObjectDefinition,
+			};
+		}
+
 		case TYPES.SET_ELEMENTS: {
 			const {newElements} = action.payload;
 
