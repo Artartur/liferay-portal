@@ -62,6 +62,12 @@ export type TAction =
 	  }
 	| {
 			payload: {
+				newChangeModalVisibility: ModelBuilderModals;
+			};
+			type: TYPES.CHANGE_MODAL_VISIBILITY;
+	  }
+	| {
+			payload: {
 				hiddenObjectDefinitionNode: boolean;
 				objectDefinitionId: number;
 				objectDefinitionName: string;
@@ -186,6 +192,7 @@ export type TAction =
 
 export type TState = {
 	baseResourceURL: string;
+	changeModalVisibility: ModelBuilderModals;
 	editObjectDefinitionURL: string;
 	elements: Elements<ObjectDefinitionNodeData | ObjectRelationshipEdgeData>;
 	filterOperators: TFilterOperators;

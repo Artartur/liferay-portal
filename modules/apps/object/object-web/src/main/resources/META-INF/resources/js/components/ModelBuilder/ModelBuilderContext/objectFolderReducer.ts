@@ -309,6 +309,15 @@ export function ObjectFolderReducer(state: TState, action: TAction): TState {
 			};
 		}
 
+		case TYPES.CHANGE_MODAL_VISIBILITY: {
+			const {newChangeModalVisibility} = action.payload;
+
+			return {
+				...state,
+				changeModalVisibility: newChangeModalVisibility,
+			};
+		}
+
 		case TYPES.CHANGE_NODE_VIEW: {
 			const {
 				hiddenObjectDefinitionNode,
