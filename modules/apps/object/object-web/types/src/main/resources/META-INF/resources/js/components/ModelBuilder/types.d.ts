@@ -6,8 +6,8 @@
 /// <reference types="react" />
 
 import {Edge, Elements, Node} from 'react-flow-renderer';
-import {TYPES} from './ModelBuilderContext/typesEnum';
 import {DeletedObjectDefinition} from '../ViewObjectDefinitions/ViewObjectDefinitions';
+import {TYPES} from './ModelBuilderContext/typesEnum';
 declare type TDropDownType =
 	| 'checkbox'
 	| 'contextual'

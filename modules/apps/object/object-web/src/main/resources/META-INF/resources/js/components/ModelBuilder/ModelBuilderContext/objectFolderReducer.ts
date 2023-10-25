@@ -228,6 +228,7 @@ export function ObjectFolderReducer(state: TState, action: TAction): TState {
 							...objectDefinitionNode.data,
 							objectFields: unselectedObjectFields,
 							selected: false,
+							showAllFields: true,
 						},
 					};
 				}
@@ -569,6 +570,7 @@ export function ObjectFolderReducer(state: TState, action: TAction): TState {
 								objectFields: objectFieldsCustomSort(
 									objectDefinition.objectFields
 								),
+								showAllFields: false,
 							},
 							id: objectDefinition.id.toString(),
 							position: {

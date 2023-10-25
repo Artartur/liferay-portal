@@ -7,15 +7,16 @@ import ClayButton from '@clayui/button';
 import DropDown from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
 import {sub} from 'frontend-js-web';
-import React, {SetStateAction} from 'react';
+import React from 'react';
 
 import './ObjectDefinitionNodeFooter.scss';
+import {useObjectFolderContext} from '../ModelBuilderContext/objectFolderContext';
+import {TYPES} from '../ModelBuilderContext/typesEnum';
 
 interface ObjectDefinitionNodeFooterProps {
 	handleSelectObjectDefinitionNode: () => void;
 	isLinkedObjectDefinition: boolean;
 	setShowAllObjectFields: (value: boolean) => void;
-	setShowModal: (value: SetStateAction<Partial<ModelBuilderModals>>) => void;
 	showAllObjectFields: boolean;
 }
 
@@ -23,9 +24,10 @@ export default function ObjectDefinitionNodeFooter({
 	handleSelectObjectDefinitionNode,
 	isLinkedObjectDefinition,
 	setShowAllObjectFields,
-	setShowModal,
 	showAllObjectFields,
 }: ObjectDefinitionNodeFooterProps) {
+	const [{changeModalVisibility}, dispatch] = useObjectFolderContext();
+
 	return (
 		<>
 			<div
@@ -59,10 +61,15 @@ export default function ObjectDefinitionNodeFooter({
 						<DropDown.ItemList>
 							<DropDown.Item
 								onClick={() =>
-									setShowModal((prevState) => ({
-										...prevState,
-										addObjectField: true,
-									}))
+									dispatch({
+										payload: {
+											newChangeModalVisibility: {
+												...changeModalVisibility,
+												addObjectField: true,
+											},
+										},
+										type: TYPES.CHANGE_MODAL_VISIBILITY,
+									})
 								}
 							>
 								<ClayIcon
@@ -75,16 +82,15 @@ export default function ObjectDefinitionNodeFooter({
 
 							<DropDown.Item
 								onClick={() => {
-									setShowModal(
-										(
-											previousState: Partial<
-												ModelBuilderModals
-											>
-										) => ({
-											...previousState,
-											addObjectRelationship: true,
-										})
-									);
+									dispatch({
+										payload: {
+											newChangeModalVisibility: {
+												...changeModalVisibility,
+												addObjectRelationship: true,
+											},
+										},
+										type: TYPES.CHANGE_MODAL_VISIBILITY,
+									});
 								}}
 							>
 								<ClayIcon
