@@ -29,10 +29,38 @@
 		top: 23px;
 	}
 
+	&__object-builder-screen-list {
+		border: none;
+		padding: 0;
+
+		&-management-bar {
+			.container-fluid {
+				max-width: none;
+				padding: 0;
+			}
+
+			&.list-group-item {
+				padding: 0 1rem;
+			}
+
+			.nav-btn {
+				margin-right: auto !important;
+			}
+
+			.navbar-form {
+				padding-left: 0 !important;
+			}
+		}
+	}
+
 	&__object-builder-screen-empty-state {
 		align-items: center;
 		display: flex;
 		justify-content: center;
 		text-align: center;
 	}
+}
+
+.list-group {
+	margin-bottom: 0;
 }
