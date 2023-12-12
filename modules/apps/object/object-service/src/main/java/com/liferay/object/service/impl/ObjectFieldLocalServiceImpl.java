@@ -185,6 +185,21 @@ public class ObjectFieldLocalServiceImpl
 				objectFieldSettings);
 		}
 
+		if (Objects.equals(businessType, "Relationship")) {
+			ObjectDefinition objectDefinition =
+				_objectDefinitionPersistence.findByPrimaryKey(
+					objectDefinitionId);
+
+			if (objectDefinition.isRootDescendantNode() &&
+				(Objects.equals(readOnly, "true") ||
+				 Objects.equals(readOnly, "conditional"))) {
+
+				throw new ObjectFieldReadOnlyException(
+					"Read only cannot be changed in relationship field when " +
+						"the object definition is a root descendant node");
+			}
+		}
+
 		return _updateObjectField(
 			externalReferenceCode, existingObjectField.getObjectFieldId(),
 			listTypeDefinitionId, businessType, dbType, indexed,
