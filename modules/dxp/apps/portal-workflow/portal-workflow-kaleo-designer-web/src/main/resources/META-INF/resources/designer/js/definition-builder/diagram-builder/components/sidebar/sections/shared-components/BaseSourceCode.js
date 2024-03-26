@@ -16,15 +16,20 @@ const BaseSourceCode = ({scriptSourceCode, updateSelectedItem}) => {
 			config={editorConfig}
 			onInstanceReady={({editor}) => {
 				editor.setMode('source');
-
 				if (scriptSourceCode) {
 					editor.setData(scriptSourceCode[0]);
 				}
-
 				document
 					.querySelector('div.sidebar-body')
 					.addEventListener('keyup', () => {
-						updateSelectedItem(editor);
+
+						// updateSelectedItem(editor.getData())
+
+					});
+				document
+					.querySelector('button.btn-back')
+					.addEventListener('click', () => {
+						updateSelectedItem(editor.getData());
 					});
 
 				return () => {
@@ -32,7 +37,7 @@ const BaseSourceCode = ({scriptSourceCode, updateSelectedItem}) => {
 						.querySelector('div.sidebar-body')
 						.removeEventListener(
 							'keyup',
-							updateSelectedItem(editor)
+							updateSelectedItem(editor.getData())
 						);
 				};
 			}}
@@ -40,5 +45,4 @@ const BaseSourceCode = ({scriptSourceCode, updateSelectedItem}) => {
 		/>
 	);
 };
-
 export default BaseSourceCode;
